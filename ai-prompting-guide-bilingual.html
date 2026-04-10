@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Prompting Mastery Guide 2025</title>
+<style>
+  :root {
+    --navy:#0f2044;--navy2:#1a3a6b;--teal:#0d9e75;--teal-l:#e0f5ee;
+    --amber:#e8920a;--amber-l:#fff4e0;--coral:#d85a30;--coral-l:#faecea;
+    --purple:#6c47d0;--purple-l:#eeedfb;--blue:#1a6fc4;--blue-l:#e6f0fb;
+    --green-l:#eaf3de;--g50:#f8f9fa;--g100:#f0f1f3;--g200:#e0e2e6;
+    --g400:#9aa0aa;--g600:#5f6470;--g900:#1a1d23;
+    --txt:#1a1d23;--muted:#5f6470;--bdr:#e0e2e6;--card:#fff;--bg:#f4f6f9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.65;font-size:15px}
+
+  /* SIDEBAR */
+  .sidebar{position:fixed;top:0;left:0;width:268px;height:100vh;
+    background:var(--navy);overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+  .sidebar-logo{padding:24px 22px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .sidebar-logo h1{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.3px}
+  .sidebar-logo p{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
+  .lang-bar{display:flex;gap:6px;margin-top:12px}
+  .lang-btn{flex:1;padding:6px 0;border-radius:6px;border:1px solid rgba(255,255,255,.15);
+    font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;background:transparent;color:rgba(255,255,255,.5)}
+  .lang-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+  .lang-btn:hover:not(.active){background:rgba(255,255,255,.08);color:#fff}
+  nav.sidenav{padding:14px 0;flex:1}
+  .nav-sec{padding:8px 22px 3px;font-size:10px;font-weight:700;letter-spacing:.08em;
+    color:rgba(255,255,255,.28);text-transform:uppercase}
+  .nav-link{display:flex;align-items:center;gap:9px;padding:9px 22px;
+    font-size:13px;color:rgba(255,255,255,.62);text-decoration:none;cursor:pointer;
+    transition:all .15s;border-left:3px solid transparent}
+  .nav-link:hover,.nav-link.active{background:rgba(255,255,255,.08);
+    color:#fff;border-left-color:var(--teal)}
+  .nav-link .ic{font-size:14px;width:17px;text-align:center}
+  .sidebar-foot{padding:14px 22px;border-top:1px solid rgba(255,255,255,.08);
+    font-size:11px;color:rgba(255,255,255,.28);line-height:1.5}
+
+  /* MAIN */
+  .main{margin-left:268px;min-height:100vh}
+  .section{display:none;padding:40px 46px;max-width:920px}
+  .section.active{display:block}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+    color:#fff;padding:56px 46px;max-width:100%}
+  .hero-tag{display:inline-block;background:rgba(13,158,117,.25);color:#5de0b5;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:4px 12px;border-radius:20px;margin-bottom:14px}
+  .hero h2{font-size:34px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px;line-height:1.2}
+  .hero p{font-size:15px;color:rgba(255,255,255,.7);max-width:560px}
+  .hero-meta{display:flex;gap:20px;margin-top:22px;flex-wrap:wrap}
+  .hero-meta-item{font-size:13px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px}
+  .hero-meta-item strong{color:rgba(255,255,255,.85)}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .cta-btn{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;
+    cursor:pointer;border:none;transition:all .15s}
+  .cta-primary{background:var(--teal);color:#fff}
+  .cta-secondary{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);
+    border:1px solid rgba(255,255,255,.2)!important}
+  .cta-btn:hover{opacity:.9;transform:translateY(-1px)}
+
+  /* SECTION HEADER */
+  .sec-hdr{margin-bottom:26px}
+  .sec-hdr h2{font-size:24px;font-weight:700;letter-spacing:-.3px}
+  .sec-hdr p{font-size:14px;color:var(--muted);margin-top:5px}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+  .stat{background:var(--card);border:1px solid var(--bdr);border-radius:12px;
+    padding:18px;text-align:center}
+  .stat-n{font-size:26px;font-weight:800}
+  .stat-l{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+  /* CARD */
+  .card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;
+    padding:22px;margin-bottom:14px}
+  .card-title{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+  .card-title h3{font-size:16px;font-weight:700}
+  .card p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:11px}
+  .card p:last-child{margin-bottom:0}
+  .g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+
+  /* BADGE */
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+  .b-teal{background:var(--teal-l);color:#085041}
+  .b-amber{background:var(--amber-l);color:#7a4600}
+  .b-coral{background:var(--coral-l);color:#8c2e10}
+  .b-purple{background:var(--purple-l);color:#3d2590}
+  .b-blue{background:var(--blue-l);color:#0c4280}
+  .b-green{background:var(--green-l);color:#2a5a0a}
+  .b-gray{background:var(--g100);color:var(--g600)}
+
+  /* CODE */
+  .code{background:#1a1d23;color:#e2e8f0;border-radius:8px;padding:14px 16px;
+    font-family:'Cascadia Code','Fira Code',Consolas,monospace;font-size:12.5px;
+    line-height:1.75;white-space:pre-wrap;margin:10px 0;border-left:3px solid var(--teal)}
+  .code.bad{border-left-color:var(--coral)}
+  .code.good{border-left-color:var(--teal)}
+  .code-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:3px;margin-top:12px}
+  .kbad{color:#fc8181}.kgood{color:#68d391}.kvar{color:#fbbf24}.kcmt{color:#718096}
+
+  /* DO/DONT */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:11px 0}
+  .do-b{background:#f0faf5;border:1px solid #a7e0c8;border-radius:10px;padding:13px 15px}
+  .dn-b{background:#fff4f4;border:1px solid #f5b8b8;border-radius:10px;padding:13px 15px}
+  .do-lbl{font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.05em;margin-bottom:5px}
+  .dn-lbl{font-size:11px;font-weight:800;color:var(--coral);letter-spacing:.05em;margin-bottom:5px}
+  .do-b p,.dn-b p{font-size:13px;color:var(--txt);line-height:1.55}
+
+  /* TIP LIST */
+  .tips{list-style:none}
+  .tips li{display:flex;align-items:flex-start;gap:9px;padding:8px 0;
+    border-bottom:1px solid var(--bdr);font-size:14px}
+  .tips li:last-child{border-bottom:none}
+  .tip-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+  .d-t{background:var(--teal-l);color:var(--teal)}
+  .d-p{background:var(--purple-l);color:var(--purple)}
+  .d-a{background:var(--amber-l);color:var(--amber)}
+  .d-c{background:var(--coral-l);color:var(--coral)}
+  .tip-txt{color:var(--muted);line-height:1.55}
+  .tip-txt strong{color:var(--txt);font-weight:600}
+
+  /* TECHNIQUE */
+  .tech-card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;
+    overflow:hidden;margin-bottom:18px}
+  .tech-hdr{padding:16px 22px 13px;border-bottom:1px solid var(--bdr);
+    display:flex;align-items:center;justify-content:space-between;gap:11px}
+  .tech-hdr h3{font-size:15px;font-weight:700}
+  .tech-body{padding:16px 22px}
+  .tech-body p{font-size:14px;color:var(--muted);margin-bottom:11px}
+  .lvl{display:flex;gap:3px;align-items:center}
+  .lvl-d{width:10px;height:10px;border-radius:50%;background:var(--bdr)}
+  .lvl-d.on{background:var(--teal)}
+
+  /* MODEL GRID */
+  .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+  .mcard{background:var(--card);border:1px solid var(--bdr);border-radius:12px;overflow:hidden}
+  .mhead{padding:18px 20px;color:#fff}
+  .mhead.cl{background:linear-gradient(135deg,#1a2e52,#2a4a8a)}
+  .mhead.gpt{background:linear-gradient(135deg,#0a3d2e,#16a34a)}
+  .mhead h3{font-size:16px;font-weight:700;margin-bottom:3px}
+  .mhead p{font-size:12px;opacity:.65}
+  .mbody{padding:14px 18px}
+  .mf{display:flex;gap:9px;align-items:flex-start;padding:7px 0;
+    border-bottom:1px solid var(--bdr);font-size:13px}
+  .mf:last-child{border-bottom:none}
+  .mf-ic{color:var(--teal);font-size:13px;margin-top:1px}
+  .mf-t{color:var(--muted)}
+  .mf-t strong{color:var(--txt);font-weight:600}
+
+  /* TEMPLATE */
+  .tmpl{background:var(--card);border:1px solid var(--bdr);border-radius:12px;
+    margin-bottom:18px;overflow:hidden}
+  .tmpl-hdr{padding:13px 19px;background:var(--g50);border-bottom:1px solid var(--bdr);
+    display:flex;align-items:center;justify-content:space-between}
+  .tmpl-hdr h3{font-size:14px;font-weight:700}
+  .tmpl-body{padding:16px 19px}
+  .tmpl-body p{font-size:13px;color:var(--muted);margin-bottom:11px}
+  .pbox{background:#f8fafc;border:1px solid var(--bdr);border-left:3px solid var(--purple);
+    border-radius:8px;padding:13px 15px;font-family:'Cascadia Code',monospace;
+    font-size:12px;line-height:1.8;color:var(--txt);white-space:pre-wrap}
+  .pvar{color:var(--purple);font-weight:600}
+
+  /* MISTAKE */
+  .mstk{background:var(--card);border:1px solid var(--bdr);border-left:4px solid var(--coral);
+    border-radius:12px;padding:19px 22px;margin-bottom:14px}
+  .mstk h3{font-size:15px;font-weight:700;margin-bottom:7px}
+  .mstk p{font-size:14px;color:var(--muted);line-height:1.6}
+  .fix{background:var(--teal-l);border-radius:8px;padding:10px 13px;
+    font-size:13px;color:#085041;margin-top:9px}
+
+  /* TABLE */
+  .twrap{border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin:11px 0}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{background:var(--navy);color:#fff;padding:9px 13px;text-align:left;
+    font-weight:600;font-size:12px}
+  td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--muted);vertical-align:top}
+  tr:hover td{background:var(--g50)}
+
+  /* CALLOUT */
+  .callout{border-radius:10px;padding:14px 16px;margin:12px 0;font-size:14px;line-height:1.6}
+  .callout.info{background:var(--blue-l);border-left:3px solid var(--blue);color:#0c4280}
+  .callout.warn{background:var(--amber-l);border-left:3px solid var(--amber);color:#7a4600}
+  .callout.tip{background:var(--teal-l);border-left:3px solid var(--teal);color:#085041}
+  .callout.purple{background:var(--purple-l);border-left:3px solid var(--purple);color:#3d2590}
+
+  /* DARK CARD */
+  .dark-card{background:var(--navy);border:none;border-radius:12px;padding:22px;margin-bottom:14px}
+
+  /* PRINT */
+  @media print{
+    .sidebar{display:none}.main{margin-left:0}
+    .section{display:block!important;padding:20px;page-break-before:always}
+  }
+  @media(max-width:720px){
+    .sidebar{display:none}.main{margin-left:0}.section{padding:22px 18px}
+    .mgrid,.dd,.stats{grid-template-columns:1fr}.hero{padding:36px 18px}
+    .hero h2{font-size:24px}
+  }
+
+  /* LANG */
+  .en{display:none}
+  body.en-mode .vi{display:none}
+  body.en-mode .en{display:revert}
+  body.en-mode nav[lang]{display:block}
+
+  /* COPY BTN */
+  .copy-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;
+    border-radius:5px;border:1px solid var(--bdr);font-size:11px;cursor:pointer;
+    background:var(--g50);color:var(--muted);float:right;margin-top:-2px}
+  .copy-btn:hover{background:var(--g100)}
+
+  /* PROGRESS */
+  .read-bar{position:fixed;top:0;left:268px;right:0;height:3px;background:var(--g200);z-index:200}
+  .read-fill{height:100%;background:var(--teal);width:0%;transition:width .1s}
+
+  /* ANCHOR LINKS */
+  h3[id]{scroll-margin-top:20px}
+
+  /* SEARCH */
+  .search-wrap{padding:0 22px 14px}
+  .search-inp{width:100%;padding:8px 12px;border-radius:8px;
+    border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);
+    color:rgba(255,255,255,.8);font-size:13px;outline:none}
+  .search-inp::placeholder{color:rgba(255,255,255,.3)}
+  .search-inp:focus{border-color:rgba(13,158,117,.5);background:rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+
+<!-- READ PROGRESS -->
+<div class="read-bar"><div class="read-fill" id="rbar"></div></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <h1>AI Mastery Guide</h1>
+    <p class="vi">Tổng hợp chuyên gia · 2025</p>
+    <p class="en">Expert synthesis · 2025</p>
+    <div class="lang-bar">
+      <button class="lang-btn active" id="btn-vi" onclick="setLang('vi')">🇻🇳 Tiếng Việt</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇺🇸 English</button>
+    </div>
+  </div>
+  <div class="search-wrap" style="margin-top:10px">
+    <input class="search-inp" type="text" id="search-inp"
+      placeholder="🔍 Search sections..." oninput="filterNav(this.value)">
+  </div>
+  <nav class="sidenav" id="sidenav">
+    <div class="nav-sec vi">Tổng quan</div><div class="nav-sec en">Overview</div>
+    <a class="nav-link active" onclick="show('home')"><span class="ic">🏠</span>
+      <span class="vi">Trang chủ</span><span class="en">Home</span></a>
+    <a class="nav-link" onclick="show('foundations')"><span class="ic">🧱</span>
+      <span class="vi">Nền tảng cốt lõi</span><span class="en">Core Foundations</span></a>
+
+    <div class="nav-sec vi">Kỹ thuật</div><div class="nav-sec en">Techniques</div>
+    <a class="nav-link" onclick="show('techniques')"><span class="ic">⚡</span>
+      <span class="vi">15 Kỹ thuật Prompting</span><span class="en">15 Prompting Techniques</span></a>
+    <a class="nav-link" onclick="show('structure')"><span class="ic">📐</span>
+      <span class="vi">Cấu trúc Prompt</span><span class="en">Prompt Structure</span></a>
+    <a class="nav-link" onclick="show('advanced')"><span class="ic">🚀</span>
+      <span class="vi">Kỹ thuật nâng cao</span><span class="en">Advanced Techniques</span></a>
+
+    <div class="nav-sec vi">Theo nền tảng</div><div class="nav-sec en">By Platform</div>
+    <a class="nav-link" onclick="show('claude')"><span class="ic">🟠</span>Claude (Anthropic)</a>
+    <a class="nav-link" onclick="show('chatgpt')"><span class="ic">🟢</span>ChatGPT (OpenAI)</a>
+    <a class="nav-link" onclick="show('compare')"><span class="ic">⚖️</span>
+      <span class="vi">So sánh Claude vs GPT</span><span class="en">Claude vs GPT Compare</span></a>
+
+    <div class="nav-sec vi">Thực hành</div><div class="nav-sec en">Practice</div>
+    <a class="nav-link" onclick="show('templates')"><span class="ic">📋</span>
+      <span class="vi">Mẫu Prompt có sẵn</span><span class="en">Ready-to-use Templates</span></a>
+    <a class="nav-link" onclick="show('usecases')"><span class="ic">💼</span>
+      <span class="vi">Theo lĩnh vực nghề nghiệp</span><span class="en">By Profession</span></a>
+    <a class="nav-link" onclick="show('mistakes')"><span class="ic">🚫</span>
+      <span class="vi">Lỗi thường gặp</span><span class="en">Common Mistakes</span></a>
+    <a class="nav-link" onclick="show('checklist')"><span class="ic">✅</span>
+      <span class="vi">Checklist & Quick Ref</span><span class="en">Checklist & Quick Ref</span></a>
+  </nav>
+  <div class="sidebar-foot">
+    <span class="vi">Nguồn: Anthropic · OpenAI · PromptingGuide.ai<br>Cập nhật tháng 4/2025</span>
+    <span class="en">Sources: Anthropic · OpenAI · PromptingGuide.ai<br>Updated April 2025</span>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ══════════════ HOME ══════════════ -->
+<div id="home" class="section active" style="padding:0;max-width:100%">
+  <div class="hero">
+    <div class="hero-tag vi">Tổng hợp chuyên gia · Anthropic & OpenAI · 2025</div>
+    <div class="hero-tag en">Expert Synthesis · Anthropic & OpenAI · 2025</div>
+    <h2 class="vi">Cẩm Nang Sử Dụng AI<br>Hiệu Quả Toàn Diện</h2>
+    <h2 class="en">The Complete Guide to<br>Using AI Effectively</h2>
+    <p class="vi">Tổng hợp từ Anthropic docs, OpenAI guidelines, PromptingGuide.ai và hàng trăm chuyên gia — tất cả kiến thức, mẹo và kỹ thuật để bạn dùng AI thông minh hơn mỗi ngày.</p>
+    <p class="en">Synthesized from Anthropic docs, OpenAI guidelines, PromptingGuide.ai and expert practitioners — everything you need to use AI smarter, every day.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">📖 <strong class="vi">10 chương</strong><strong class="en">10 chapters</strong></div>
+      <div class="hero-meta-item">⚡ <strong>15+ </strong><span class="vi">kỹ thuật</span><span class="en">techniques</span></div>
+      <div class="hero-meta-item">📋 <strong>25+ </strong><span class="vi">mẫu prompt</span><span class="en">prompt templates</span></div>
+      <div class="hero-meta-item">🤖 <span class="vi">Claude & ChatGPT đầy đủ</span><span class="en">Full Claude & ChatGPT coverage</span></div>
+    </div>
+    <div class="cta-row">
+      <button class="cta-btn cta-primary" onclick="show('foundations')">
+        <span class="vi">🧱 Bắt đầu từ nền tảng</span><span class="en">🧱 Start with foundations</span>
+      </button>
+      <button class="cta-btn cta-secondary" onclick="show('techniques')">
+        <span class="vi">⚡ Xem kỹ thuật prompting</span><span class="en">⚡ Browse techniques</span>
+      </button>
+      <button class="cta-btn cta-secondary" onclick="show('templates')">
+        <span class="vi">📋 Dùng mẫu ngay</span><span class="en">📋 Use templates now</span>
+      </button>
+    </div>
+  </div>
+
+  <div style="padding:36px 46px;max-width:920px">
+    <div class="stats">
+      <div class="stat"><div class="stat-n" style="color:var(--teal)">55%</div>
+        <div class="stat-l vi">Người dùng thành thạo thường xuyên tinh chỉnh prompt qua nhiều vòng lặp</div>
+        <div class="stat-l en">Of skilled users regularly refine prompts through multiple iterations</div>
+      </div>
+      <div class="stat"><div class="stat-n" style="color:var(--purple)">1,500+</div>
+        <div class="stat-l vi">Bài nghiên cứu được phân tích để xây dựng hướng dẫn prompting toàn diện</div>
+        <div class="stat-l en">Research papers analyzed to build this comprehensive prompting guide</div>
+      </div>
+      <div class="stat"><div class="stat-n" style="color:var(--amber)">18%</div>
+        <div class="stat-l vi">Cải thiện hiệu suất AI khi dùng đúng kỹ thuật prompting (Cognition AI)</div>
+        <div class="stat-l en">Performance improvement using proper prompting techniques (Cognition AI)</div>
+      </div>
+    </div>
+
+    <div class="sec-hdr">
+      <h2 class="vi">Tại sao kỹ năng prompting quan trọng?</h2>
+      <h2 class="en">Why does prompting skill matter?</h2>
+      <p class="vi">AI ngày càng mạnh, nhưng chất lượng đầu ra phụ thuộc 80% vào cách bạn đặt câu hỏi.</p>
+      <p class="en">AI keeps getting stronger, but output quality depends 80% on how you ask questions.</p>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-title"><span class="badge b-teal vi">Thực tế</span><span class="badge b-teal en">Reality</span>
+          <h3 class="vi">AI làm chính xác những gì bạn viết</h3>
+          <h3 class="en">AI does exactly what you write</h3>
+        </div>
+        <p class="vi">Claude 4.x và GPT-5 không tự đoán ý. Thiếu ngữ cảnh → kết quả mơ hồ, không đúng trọng tâm. Người dùng thành thạo nhận kết quả tốt hơn 5–10× nhờ biết cách viết prompt đúng.</p>
+        <p class="en">Claude 4.x and GPT-5 don't guess your intent. Missing context → vague, off-target results. Skilled users get 5–10× better results simply by knowing how to write proper prompts.</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="badge b-purple vi">Xu hướng 2025</span><span class="badge b-purple en">2025 Trend</span>
+          <h3 class="vi">Prompt engineering là kỹ năng nghề</h3>
+          <h3 class="en">Prompt engineering is a career skill</h3>
+        </div>
+        <p class="vi">Không còn là "thủ thuật" — đây là kỹ năng chuyên môn thiết yếu. Mọi ngành: lập trình, marketing, tài chính, giáo dục, y tế. Biết dùng AI hiệu quả = lợi thế cạnh tranh thực sự.</p>
+        <p class="en">No longer a "trick" — it's an essential professional skill across every field: engineering, marketing, finance, education, healthcare. AI proficiency = real competitive advantage.</p>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <strong>💡 </strong><span class="vi">Mẹo đọc:</span><span class="en">Reading tip:</span>
+      <span class="vi"> Người mới → bắt đầu từ <strong>Nền tảng</strong>. Developer/marketer có kinh nghiệm → nhảy thẳng tới <strong>Kỹ thuật</strong> hoặc <strong>Theo lĩnh vực</strong>. Cần prompt ngay → xem <strong>Mẫu có sẵn</strong>.</span>
+      <span class="en"> Beginners → start with <strong>Foundations</strong>. Experienced devs/marketers → jump to <strong>Techniques</strong> or <strong>By Profession</strong>. Need prompts now → see <strong>Templates</strong>.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ FOUNDATIONS ══════════════ -->
+<div id="foundations" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">🧱 Nền Tảng — 6 Nguyên Tắc Vàng</h2>
+    <h2 class="en">🧱 Foundations — 6 Golden Principles</h2>
+    <p class="vi">Những nguyên lý cốt lõi áp dụng cho mọi AI, mọi tác vụ. Nắm vững phần này trước khi học kỹ thuật nâng cao.</p>
+    <p class="en">Core principles that apply to every AI system and every task. Master these before moving to advanced techniques.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--teal)">
+    <div class="card-title"><span class="badge b-teal">01</span>
+      <h3 class="vi">Rõ ràng + Cụ thể + Đủ ngữ cảnh</h3>
+      <h3 class="en">Clarity + Specificity + Sufficient Context</h3>
+    </div>
+    <p class="vi">AI hiện đại làm <em>chính xác</em> những gì bạn yêu cầu, không tự suy luận thêm. Câu hỏi mơ hồ = câu trả lời mơ hồ. Hãy cung cấp: môi trường/bối cảnh, vấn đề cụ thể, số lượng kết quả mong muốn, định dạng đầu ra, và mức độ giải thích cần thiết.</p>
+    <p class="en">Modern AI does <em>exactly</em> what you ask, without inferring intent. Vague question = vague answer. Provide: environment/context, specific problem, desired number of results, output format, and required level of explanation.</p>
+    <div class="code-lbl vi">❌ Prompt yếu — thiếu ngữ cảnh</div>
+    <div class="code-lbl en">❌ Weak prompt — missing context</div>
+    <div class="code bad"><span class="kbad">"Fix my website loading slowly and showing errors."</span></div>
+    <div class="code-lbl vi">✅ Prompt mạnh — đầy đủ thông tin</div>
+    <div class="code-lbl en">✅ Strong prompt — complete information</div>
+    <div class="code good"><span class="kgood">"My WordPress site on Nginx / Ubuntu 20.04 has high TTFB (&gt;3s)
+and occasional 502 Bad Gateway errors under load (&gt;100 concurrent users).
+
+Diagnose the 3 most likely causes and suggest specific nginx.conf fixes.
+Show before/after config snippets for each fix.
+Explain why each change helps.
+Flag any fix that could break existing SSL or caching behavior."</span></div>
+    <p class="vi" style="font-size:13px;margin-top:8px">Khác biệt: stack cụ thể → triệu chứng đo được → số lượng giải pháp → định dạng (snippet) → yêu cầu giải thích → cảnh báo edge case.</p>
+    <p class="en" style="font-size:13px;margin-top:8px">The difference: specific stack → measurable symptoms → number of solutions → format (snippets) → explanation requirement → edge case warning.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--purple)">
+    <div class="card-title"><span class="badge b-purple">02</span>
+      <h3 class="vi">Lặp lại và tinh chỉnh — Prompt là quá trình</h3>
+      <h3 class="en">Iteration — Prompting is a Process</h3>
+    </div>
+    <p class="vi">Prompt đầu tiên gần như không bao giờ hoàn hảo. Nghiên cứu cho thấy 55%+ người dùng AI thành thạo chỉnh sửa qua nhiều vòng. Xem prompt đầu như "phác thảo khởi điểm", không phải sản phẩm cuối.</p>
+    <p class="en">The first prompt is almost never perfect. Research shows 55%+ of skilled AI users iterate multiple times. Treat your first prompt as a "starting draft," not the final product.</p>
+    <div class="callout tip">
+      <strong class="vi">Quy trình tinh chỉnh 3 bước:</strong><strong class="en">3-step refinement process:</strong>
+      <br><span class="vi">1. Gửi prompt → đọc kết quả kỹ → xác định CHÍNH XÁC điểm nào chưa đạt</span>
+      <span class="en">1. Send prompt → read output carefully → identify EXACTLY what's missing</span>
+      <br><span class="vi">2. Thêm thông tin còn thiếu vào prompt (ngữ cảnh / ví dụ / ràng buộc)</span>
+      <span class="en">2. Add the missing information (context / examples / constraints)</span>
+      <br><span class="vi">3. Lặp lại cho đến khi kết quả đạt yêu cầu — thường chỉ cần 2–3 vòng</span>
+      <span class="en">3. Repeat until satisfied — usually only 2–3 rounds needed</span>
+    </div>
+    <div class="dd">
+      <div class="do-b">
+        <div class="do-lbl vi">✓ NÊN LÀM</div><div class="do-lbl en">✓ DO THIS</div>
+        <p class="vi">Bắt đầu đơn giản → xem kết quả → thêm chi tiết còn thiếu từng bước một</p>
+        <p class="en">Start simple → review output → add missing detail one step at a time</p>
+      </div>
+      <div class="dn-b">
+        <div class="dn-lbl vi">✗ TRÁNH</div><div class="dn-lbl en">✗ AVOID</div>
+        <p class="vi">Viết prompt siêu dài phức tạp ngay từ đầu rồi thất vọng khi kết quả chưa đạt</p>
+        <p class="en">Writing an overly complex prompt upfront then getting frustrated when results miss</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--amber)">
+    <div class="card-title"><span class="badge b-amber">03</span>
+      <h3 class="vi">Ví dụ mạnh hơn mô tả</h3>
+      <h3 class="en">Examples Beat Descriptions</h3>
+    </div>
+    <p class="vi">Thay vì mô tả trừu tượng về chất lượng bạn muốn, hãy <strong>chỉ ra ví dụ cụ thể</strong>. Nghiên cứu từ Learn Prompting: cung cấp ví dụ thực tế (few-shot) cải thiện kết quả hơn bất kỳ hướng dẫn nào bằng lời.</p>
+    <p class="en">Instead of abstractly describing the quality you want, <strong>show concrete examples</strong>. Learn Prompting research: providing real examples (few-shot) improves results more than any verbal instruction.</p>
+    <div class="code-lbl vi">❌ Mô tả trừu tượng</div><div class="code-lbl en">❌ Abstract description</div>
+    <div class="code bad"><span class="kbad">"Write a product description that is professional, concise, and compelling."</span></div>
+    <div class="code-lbl vi">✅ Ví dụ cụ thể — AI học pattern trực tiếp</div><div class="code-lbl en">✅ Concrete example — AI learns the pattern directly</div>
+    <div class="code good"><span class="kgood">"Write a product description in this exact style and format:
+
+Example: 'The MX Master 3S isn't a mouse — it's a precision instrument.
+4000 DPI sensor. Silent clicks. 70-day battery.
+Built for those who never stop.'
+
+Now write a similar description for: [your product here]"</span></div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--coral)">
+    <div class="card-title"><span class="badge b-coral">04</span>
+      <h3 class="vi">Cho phép AI thừa nhận giới hạn</h3>
+      <h3 class="en">Allow AI to Acknowledge Limits</h3>
+    </div>
+    <p class="vi">Thêm một câu đơn giản: <em>"Nếu thông tin không đủ để kết luận chắc chắn, hãy nói rõ thay vì đoán mò"</em> — giúp giảm thiểu đáng kể hallucination (thông tin bịa đặt). Đặc biệt quan trọng với dữ liệu số, sự kiện lịch sử, thông tin y tế, pháp lý.</p>
+    <p class="en">Add one simple sentence: <em>"If the information is insufficient to draw firm conclusions, say so rather than speculating"</em> — significantly reduces hallucination. Especially important for numerical data, historical facts, medical, or legal information.</p>
+    <div class="code"><span class="kgood">"Analyze this financial data and identify trends.
+If the data is insufficient to draw confident conclusions,
+explicitly state that rather than speculating.
+Flag any assumptions you make."</span></div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--blue)">
+    <div class="card-title"><span class="badge b-blue">05</span>
+      <h3 class="vi">Định dạng đầu ra rõ ràng</h3>
+      <h3 class="en">Specify Output Format Explicitly</h3>
+    </div>
+    <p class="vi">Nếu bạn cần JSON, bảng, danh sách, đoạn văn, hay một số từ cụ thể — hãy nói thẳng. AI sẽ không tự chọn định dạng tối ưu cho use case của bạn nếu bạn không chỉ định.</p>
+    <p class="en">If you need JSON, a table, bullet list, paragraph, or specific word count — say it explicitly. AI won't auto-select the optimal format for your use case unless instructed.</p>
+    <div class="twrap"><table>
+      <thead><tr>
+        <th class="vi">Thay vì</th><th class="vi">Hãy viết</th>
+        <th class="en">Instead of</th><th class="en">Write</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="vi">"Tóm tắt tài liệu này"</td><td class="vi">"Tóm tắt trong 5 bullet points, mỗi bullet ≤ 20 từ"</td>
+            <td class="en">"Summarize this document"</td><td class="en">"Summarize in 5 bullet points, each ≤ 20 words"</td></tr>
+        <tr><td class="vi">"Phân tích dữ liệu"</td><td class="vi">"Phân tích và trình bày dạng bảng: Metric | Giá trị | Nhận xét"</td>
+            <td class="en">"Analyze the data"</td><td class="en">"Analyze and present as a table: Metric | Value | Insight"</td></tr>
+        <tr><td class="vi">"Viết email"</td><td class="vi">"Viết email ≤ 150 từ, có subject line, kết bằng CTA rõ ràng"</td>
+            <td class="en">"Write an email"</td><td class="en">"Write email ≤ 150 words, include subject line, end with clear CTA"</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--teal)">
+    <div class="card-title"><span class="badge b-teal">06</span>
+      <h3 class="vi">Một prompt = Một mục tiêu chính</h3>
+      <h3 class="en">One Prompt = One Primary Goal</h3>
+    </div>
+    <p class="vi">Gộp nhiều mục tiêu vào một prompt → AI làm tất cả ở mức trung bình. Tách riêng → AI làm từng việc thực sự tốt. Dùng kỹ thuật Prompt Chaining khi cần xử lý nhiều bước.</p>
+    <p class="en">Combining many goals in one prompt → AI does everything at an average level. Keep separate → AI excels at each individual task. Use Prompt Chaining when multiple steps are needed.</p>
+    <div class="callout warn">
+      <span class="vi">⚠️ Dấu hiệu prompt đang quá tải: bạn không thể tóm tắt yêu cầu trong 1 câu. Nếu vậy, hãy chia nhỏ prompt.</span>
+      <span class="en">⚠️ Sign of an overloaded prompt: you can't summarize the request in 1 sentence. If so, split the prompt.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TECHNIQUES ══════════════ -->
+<div id="techniques" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">⚡ 15 Kỹ Thuật Prompting</h2>
+    <h2 class="en">⚡ 15 Prompting Techniques</h2>
+    <p class="vi">Từ cơ bản đến nâng cao — mỗi kỹ thuật có ví dụ thực tế, mức hiệu quả và khi nào nên dùng.</p>
+    <p class="en">From basic to advanced — each technique includes real examples, effectiveness rating, and when to use it.</p>
+  </div>
+
+  <!-- T1 -->
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-teal" style="margin-bottom:5px">Basic</span>
+        <h3>1. Zero-Shot Prompting</h3></div>
+      <div style="text-align:right"><div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="vi">Hiệu quả</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="en">Effectiveness</div>
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d"></div><div class="lvl-d"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Yêu cầu trực tiếp, không cần ví dụ. Model mới như Claude 4 và GPT-5 xử lý tốt zero-shot cho hầu hết tác vụ thông thường. Phù hợp nhất khi tác vụ rõ ràng và đơn giản.</p>
+      <p class="en">Direct request without examples. New models like Claude 4 and GPT-5 handle zero-shot well for most standard tasks. Best when the task is clear and simple.</p>
+      <div class="code">"<span class="kgood vi">Dịch đoạn văn sau sang tiếng Anh, giữ nguyên giọng điệu chuyên nghiệp:</span>
+<span class="kgood en">Translate the following paragraph to Vietnamese, maintaining professional tone:</span>
+[<span class="kvar vi">nội dung cần dịch</span><span class="kvar en">content to translate</span>]"</div>
+    </div>
+  </div>
+
+  <!-- T2 -->
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-teal" style="margin-bottom:5px">Basic</span>
+        <h3 class="vi">2. Few-Shot Prompting — Học từ ví dụ</h3>
+        <h3 class="en">2. Few-Shot Prompting — Learn from Examples</h3>
+      </div>
+      <div style="text-align:right"><div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="vi">Hiệu quả</div><div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="en">Effectiveness</div>
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Cung cấp 2–5 ví dụ mẫu trước khi đặt câu hỏi thực sự. Cực kỳ hiệu quả khi cần định dạng đầu ra nhất quán, phân loại văn bản, hay viết theo phong cách cụ thể.</p>
+      <p class="en">Provide 2–5 example pairs before your actual request. Extremely effective for consistent output formatting, text classification, or writing in a specific style.</p>
+      <div class="code"><span class="kcmt vi"># Ví dụ phân loại sentiment</span>
+<span class="kcmt en"># Sentiment classification example</span>
+
+"<span class="kgood">Review: 'Sản phẩm giao nhanh, đóng gói cẩn thận.' → Positive
+Review: 'Hàng bị lỗi, hỗ trợ không phản hồi.' → Negative
+Review: 'Chất lượng bình thường, giá hơi cao.' → Neutral
+
+Now classify:
+Review: 'Màu sắc đẹp nhưng size bị lệch một chút.' → ?</span>"</div>
+      <div class="callout tip">
+        💡 <span class="vi">Mẹo: Bắt đầu với 1 ví dụ (one-shot). Chỉ thêm tiếp nếu kết quả vẫn chưa đạt. Đảm bảo ví dụ phản ánh đúng output bạn muốn — AI học pattern từ đó.</span>
+        <span class="en">Tip: Start with 1 example (one-shot). Only add more if results are still off. Ensure your examples accurately reflect the output you want — AI learns the pattern from them.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- T3 -->
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-purple" style="margin-bottom:5px">Intermediate</span>
+        <h3 class="vi">3. Chain-of-Thought (CoT) — Lý luận từng bước</h3>
+        <h3 class="en">3. Chain-of-Thought (CoT) — Step-by-Step Reasoning</h3>
+      </div>
+      <div style="text-align:right"><div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="vi">Hiệu quả</div><div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="en">Effectiveness</div>
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Yêu cầu AI giải thích quá trình suy luận từng bước trước khi đưa ra kết quả. Kỹ thuật hiệu quả nhất với bài toán phức tạp — toán học, logic, phân tích chiến lược, debug lỗi.</p>
+      <p class="en">Ask AI to explain its reasoning step by step before giving a final answer. Most effective technique for complex problems — math, logic, strategic analysis, debugging.</p>
+      <div class="code-lbl vi">Cách 1 — Zero-shot CoT (đơn giản nhất)</div><div class="code-lbl en">Method 1 — Zero-shot CoT (simplest)</div>
+      <div class="code"><span class="kgood">"[your question here]
+
+Let's think through this step by step."</span>
+<span class="kcmt vi"># Chỉ thêm câu cuối này — thường đủ để cải thiện đáng kể</span>
+<span class="kcmt en"># Just add this final sentence — often enough to significantly improve results</span></div>
+      <div class="code-lbl vi">Cách 2 — Few-shot CoT (hiệu quả cao nhất)</div><div class="code-lbl en">Method 2 — Few-shot CoT (highest effectiveness)</div>
+      <div class="code"><span class="kgood">"Q: A store buys goods for $80 and sells at 25% profit. Tax is 10%.
+What is the final selling price?
+
+A: Let me work through this step by step.
+Step 1: Calculate profit. $80 × 25% = $20 profit.
+Step 2: Price before tax = $80 + $20 = $100.
+Step 3: Add tax. $100 × 10% = $10 tax.
+Step 4: Final price = $100 + $10 = $110.
+
+Now solve: [your problem]"</span></div>
+    </div>
+  </div>
+
+  <!-- T4 -->
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-purple" style="margin-bottom:5px">Intermediate</span>
+        <h3 class="vi">4. Role Prompting — Giao vai trò chuyên gia</h3>
+        <h3 class="en">4. Role Prompting — Assign Expert Persona</h3>
+      </div>
+      <div style="text-align:right"><div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="vi">Hiệu quả</div><div style="font-size:11px;color:var(--muted);margin-bottom:3px" class="en">Effectiveness</div>
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d"></div><div class="lvl-d"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Giao vai trò cụ thể để AI điều chỉnh giọng điệu và mức độ chuyên môn. Hiệu quả nhất cho nội dung sáng tạo và định hướng phong cách viết.</p>
+      <p class="en">Assign a specific role to adjust tone and expertise level. Most effective for creative content and writing style guidance.</p>
+      <div class="code"><span class="kgood vi">"Bạn là senior UX designer với 10 năm kinh nghiệm tại fintech startups.
+Hãy review user flow đăng nhập này và chỉ ra 3 friction points
+ảnh hưởng nhiều nhất đến tỷ lệ hoàn thành: [mô tả flow]"</span>
+<span class="kgood en">"You are a senior UX designer with 10 years of experience at fintech startups.
+Review this login user flow and identify the 3 friction points
+most likely to hurt completion rates: [flow description]"</span></div>
+      <div class="callout warn">
+        ⚠️ <span class="vi"><strong>Hiểu lầm quan trọng:</strong> "You are a world-class expert" KHÔNG tăng độ chính xác dữ liệu thực tế. Nghiên cứu của Sander Schulhoff (phân tích 1500+ bài báo) cho thấy sự khác biệt accuracy chỉ ~0.01 — không có ý nghĩa thống kê. Role chỉ ảnh hưởng đến TONE và PHONG CÁCH.</span>
+        <span class="en"><strong>Important misconception:</strong> "You are a world-class expert" does NOT increase factual accuracy. Research by Sander Schulhoff (1500+ papers analyzed) shows accuracy difference is only ~0.01 — statistically insignificant. Role only affects TONE and STYLE.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- T5-T8 condensed -->
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-amber" style="margin-bottom:5px">Advanced</span>
+        <h3 class="vi">5. Self-Consistency — Đa đường suy luận</h3>
+        <h3 class="en">5. Self-Consistency — Multiple Reasoning Paths</h3>
+      </div>
+      <div style="text-align:right">
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Hỏi cùng một câu hỏi theo 3–5 cách khác nhau, rồi chọn câu trả lời xuất hiện nhiều nhất (majority voting). Như hỏi 5 chuyên gia độc lập — câu trả lời được đồng thuận nhiều nhất thường đáng tin nhất.</p>
+      <p class="en">Ask the same question in 3–5 different ways, then pick the most frequent answer (majority voting). Like asking 5 independent experts — the most agreed-upon answer is usually most reliable.</p>
+      <div class="code"><span class="kcmt vi"># Hỏi cùng vấn đề theo 3 góc độ khác nhau:</span>
+<span class="kcmt en"># Ask the same issue from 3 different angles:</span>
+<span class="kgood">Prompt A: "As a financial analyst, evaluate the risk of [investment]"
+Prompt B: "What are the top 3 reasons [investment] could fail?"
+Prompt C: "Compare [investment] to industry benchmarks for risk"
+</span><span class="kcmt vi"># → Điểm chung giữa 3 kết quả = câu trả lời đáng tin nhất</span>
+<span class="kcmt en"># → The common ground between 3 results = most reliable answer</span></div>
+      <p class="vi">Phù hợp: quyết định tài chính, kiểm tra thực tế, phân tích rủi ro. Chi phí cao hơn (nhiều lần gọi) nhưng độ tin cậy tăng đáng kể.</p>
+      <p class="en">Best for: financial decisions, fact-checking, risk analysis. Higher cost (multiple calls) but significantly improved reliability.</p>
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-amber" style="margin-bottom:5px">Advanced</span>
+        <h3 class="vi">6. Prompt Chaining — Xâu chuỗi tác vụ phức tạp</h3>
+        <h3 class="en">6. Prompt Chaining — Chain Complex Tasks</h3>
+      </div>
+      <div style="text-align:right">
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Chia tác vụ phức tạp thành nhiều bước nhỏ. Đầu ra của bước trước là đầu vào của bước tiếp theo. Giữ từng prompt tập trung vào 1 mục tiêu, tránh nhồi nhét tất cả vào 1 prompt duy nhất.</p>
+      <p class="en">Break complex tasks into smaller steps. Each output becomes the next input. Keep each prompt focused on 1 goal, avoiding information overload in a single prompt.</p>
+      <div class="code"><span class="kvar vi">Bước 1:</span><span class="kvar en">Step 1:</span> <span class="kgood">"Phân tích điểm mạnh/yếu của bài viết này: [nội dung]"</span>
+    ↓ <span class="kcmt vi">(dùng output làm input cho bước 2)</span><span class="kcmt en">(use output as input for step 2)</span>
+<span class="kvar vi">Bước 2:</span><span class="kvar en">Step 2:</span> <span class="kgood">"Dựa trên phân tích trên [paste analysis], viết lại phần mở đầu"</span>
+    ↓
+<span class="kvar vi">Bước 3:</span><span class="kvar en">Step 3:</span> <span class="kgood">"Đề xuất 5 tiêu đề A/B test cho bài viết đã chỉnh sửa [paste]"</span></div>
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-coral" style="margin-bottom:5px">Advanced</span>
+        <h3 class="vi">7. Tree of Thought — Khám phá song song nhiều hướng</h3>
+        <h3 class="en">7. Tree of Thought — Parallel Multi-Path Exploration</h3>
+      </div>
+      <div style="text-align:right">
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Yêu cầu AI khám phá nhiều hướng tiếp cận song song, đánh giá từng hướng, rồi chọn hướng tốt nhất. Rất phù hợp với thiết kế sản phẩm, lập kế hoạch chiến lược, giải quyết vấn đề sáng tạo.</p>
+      <p class="en">Ask AI to explore multiple approaches in parallel, evaluate each, then select the best. Excellent for product design, strategic planning, creative problem-solving.</p>
+      <div class="code"><span class="kgood vi">"Hãy phân tích 3 kiến trúc khác nhau cho vấn đề này:
+
+Hướng A — [Mô tả]: Ưu điểm? Nhược điểm? Risk?
+Hướng B — [Mô tả]: Ưu điểm? Nhược điểm? Risk?
+Hướng C — [Mô tả]: Ưu điểm? Nhược điểm? Risk?
+
+Sau đó khuyến nghị hướng tốt nhất cho context: [mô tả constraints của bạn]"</span>
+<span class="kgood en">"Analyze 3 different architectures for this problem:
+
+Option A — [Description]: Pros? Cons? Risks?
+Option B — [Description]: Pros? Cons? Risks?
+Option C — [Description]: Pros? Cons? Risks?
+
+Then recommend the best option given this context: [your constraints]"</span></div>
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-blue" style="margin-bottom:5px">Practical</span>
+        <h3 class="vi">8. Constrained Output — Kiểm soát định dạng đầu ra</h3>
+        <h3 class="en">8. Constrained Output — Control Output Format</h3>
+      </div>
+      <div style="text-align:right">
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Xác định rõ ràng định dạng, cấu trúc, độ dài. Giúp kết quả nhất quán và trực tiếp dùng được mà không cần xử lý thêm.</p>
+      <p class="en">Explicitly specify format, structure, length. Results are consistent and immediately usable without post-processing.</p>
+      <div class="code"><span class="kgood">"Extract JSON from this text. Return ONLY valid JSON, no explanation.
+Schema: { "name": string, "date": ISO-8601, "amount": number, "currency": string }
+
+Text: [your text]"</span></div>
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-hdr">
+      <div><span class="badge b-purple" style="margin-bottom:5px">Advanced</span>
+        <h3 class="vi">9. Adversarial Prompting — Để AI tự phản biện</h3>
+        <h3 class="en">9. Adversarial Prompting — Let AI Self-Critique</h3>
+      </div>
+      <div style="text-align:right">
+        <div class="lvl"><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d on"></div><div class="lvl-d"></div></div>
+      </div>
+    </div>
+    <div class="tech-body">
+      <p class="vi">Sau khi nhận kết quả, yêu cầu AI đóng vai Devil's Advocate để phát hiện điểm yếu trong kế hoạch, lập luận, hay code. Kết hợp hoàn hảo với Prompt Chaining.</p>
+      <p class="en">After receiving output, ask AI to play Devil's Advocate and find weaknesses in plans, arguments, or code. Pairs perfectly with Prompt Chaining.</p>
+      <div class="code"><span class="kgood vi">"Bây giờ hãy đóng vai người phản biện. Đưa ra 5 lý do
+tại sao kế hoạch trên có thể thất bại. Tập trung vào:
+- Giả định sai lầm trong kế hoạch
+- Rủi ro thị trường bị bỏ qua
+- Thiếu sót về nguồn lực
+- Rủi ro thực thi"</span>
+<span class="kgood en">"Now play Devil's Advocate. Give 5 reasons
+why the above plan could fail. Focus on:
+- Flawed assumptions in the plan
+- Overlooked market risks
+- Resource shortfalls
+- Execution risks"</span></div>
+    </div>
+  </div>
+
+  <div class="callout purple">
+    <strong class="vi">📚 Các kỹ thuật khác:</strong><strong class="en">📚 Additional techniques:</strong>
+    <br>
+    <span class="vi">10. <strong>Meta-Prompting</strong> — Để AI viết prompt cho bạn &nbsp;|&nbsp;
+    11. <strong>RAG Prompting</strong> — Kết hợp tài liệu riêng &nbsp;|&nbsp;
+    12. <strong>Contextual Prompting</strong> — Cung cấp background sâu &nbsp;|&nbsp;
+    13. <strong>Iterative Refinement</strong> — Tinh chỉnh qua nhiều vòng &nbsp;|&nbsp;
+    14. <strong>Multimodal Prompting</strong> — Kết hợp text + image &nbsp;|&nbsp;
+    15. <strong>System Prompting</strong> — Thiết lập hành vi nền (API)</span>
+    <span class="en">10. <strong>Meta-Prompting</strong> — Let AI write prompts for you &nbsp;|&nbsp;
+    11. <strong>RAG Prompting</strong> — Integrate private documents &nbsp;|&nbsp;
+    12. <strong>Contextual Prompting</strong> — Provide deep background &nbsp;|&nbsp;
+    13. <strong>Iterative Refinement</strong> — Multi-round improvement &nbsp;|&nbsp;
+    14. <strong>Multimodal Prompting</strong> — Combine text + image &nbsp;|&nbsp;
+    15. <strong>System Prompting</strong> — Configure baseline behavior (API)</span>
+  </div>
+</div>
+
+<!-- ══════════════ STRUCTURE ══════════════ -->
+<div id="structure" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">📐 Cấu Trúc Prompt Tối Ưu</h2>
+    <h2 class="en">📐 Optimal Prompt Structure</h2>
+    <p class="vi">Framework CRISP — cách xây dựng một prompt hoàn chỉnh, được kiểm chứng bởi Anthropic và OpenAI.</p>
+    <p class="en">The CRISP Framework — how to build a complete prompt, validated by Anthropic and OpenAI guidelines.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--purple)">
+    <h3 style="margin-bottom:16px">Framework CRISP</h3>
+    <ul class="tips">
+      <li><div class="tip-dot d-p"><strong>C</strong></div><div class="tip-txt"><strong>Context</strong> — <span class="vi">Bối cảnh: bạn là ai, dự án/tình huống là gì, AI cần biết gì để trả lời đúng trọng tâm?</span><span class="en">Background: who you are, what the project/situation is, what AI needs to know to be on-target?</span></div></li>
+      <li><div class="tip-dot d-t"><strong>R</strong></div><div class="tip-txt"><strong>Role</strong> — <span class="vi">Vai trò: AI đóng vai chuyên gia nào? (Không bắt buộc nhưng hữu ích khi cần tone/style đặc thù)</span><span class="en">Role: What expert should AI embody? (Optional but useful for specific tone/style)</span></div></li>
+      <li><div class="tip-dot d-a"><strong>I</strong></div><div class="tip-txt"><strong>Instructions</strong> — <span class="vi">Hướng dẫn cụ thể: yêu cầu chính xác bạn muốn AI làm, từng bước nếu cần</span><span class="en">Specific instructions: exactly what you want AI to do, step by step if needed</span></div></li>
+      <li><div class="tip-dot d-c"><strong>S</strong></div><div class="tip-txt"><strong>Samples</strong> — <span class="vi">Ví dụ: 1–3 mẫu về output mong muốn — yếu tố cải thiện chất lượng mạnh nhất</span><span class="en">Examples: 1–3 samples of desired output — the single strongest quality improvement factor</span></div></li>
+      <li><div class="tip-dot d-t"><strong>P</strong></div><div class="tip-txt"><strong>Parameters</strong> — <span class="vi">Tham số đầu ra: định dạng, độ dài, tone, ngôn ngữ, ràng buộc</span><span class="en">Output parameters: format, length, tone, language, constraints</span></div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">Ví dụ prompt hoàn chỉnh theo CRISP</h3><h3 class="en">Complete CRISP prompt example</h3></div>
+    <div class="code"><span class="kcmt">[CONTEXT]</span>
+<span class="kgood vi">Tôi là Product Manager tại startup SaaS B2B. Sản phẩm: quản lý dự án
+cho team 10–50 người. Đối thủ: Asana và Monday.com.
+Ra mắt tính năng tích hợp AI scheduling vào Q3 2025.
+
+</span><span class="kgood en">I'm a Product Manager at a B2B SaaS startup. Product: project management
+for teams of 10–50 people. Competitors: Asana and Monday.com.
+Launching an AI scheduling integration feature in Q3 2025.
+
+</span><span class="kcmt">[ROLE]</span>
+<span class="kgood vi">Bạn là B2B copywriter chuyên mảng SaaS với kinh nghiệm growth marketing.
+
+</span><span class="kgood en">You are a B2B copywriter specializing in SaaS with growth marketing experience.
+
+</span><span class="kcmt">[INSTRUCTIONS]</span>
+<span class="kgood vi">Viết 3 phiên bản email thông báo ra mắt tính năng cho khách hàng hiện tại.
+Mỗi phiên bản nhắm vào một pain point khác nhau:
+A) Tiết kiệm thời gian họp / B) Giảm conflict lịch / C) Cải thiện on-time delivery
+
+</span><span class="kgood en">Write 3 versions of a feature launch announcement email for existing customers.
+Each version targets a different pain point:
+A) Saving meeting time / B) Reducing schedule conflicts / C) Improving on-time delivery
+
+</span><span class="kcmt">[SAMPLES - style mong muốn]</span>
+<span class="kgood">"Stop managing projects. Start shipping products.
+Our new AI scheduling saves your team 4 hours every week."
+
+</span><span class="kcmt">[PARAMETERS]</span>
+<span class="kgood">Subject line + 120-word body + CTA button text.
+Tone: professional but conversational. No jargon. No "world-class" or "cutting-edge".</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">Thứ tự thông tin trong prompt</h3><h3 class="en">Information order in prompt</h3></div>
+    <div class="twrap"><table>
+      <thead><tr>
+        <th class="vi">Vị trí</th><th class="vi">Nội dung</th><th class="vi">Lý do</th>
+        <th class="en">Position</th><th class="en">Content</th><th class="en">Reason</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="vi">Đầu tiên</td><td class="vi">Ngữ cảnh & Vai trò</td><td class="vi">Thiết lập "khung tư duy" cho AI trước khi đọc yêu cầu</td>
+          <td class="en">First</td><td class="en">Context & Role</td><td class="en">Sets the "thinking frame" before AI reads the request</td>
+        </tr>
+        <tr>
+          <td class="vi">Giữa</td><td class="vi">Tài liệu & Ví dụ</td><td class="vi">AI đọc và học pattern từ ví dụ trong ngữ cảnh đã có</td>
+          <td class="en">Middle</td><td class="en">Documents & Examples</td><td class="en">AI reads and learns patterns with context already set</td>
+        </tr>
+        <tr>
+          <td class="vi">Cuối</td><td class="vi">Yêu cầu cụ thể + Output format</td><td class="vi">AI vừa đọc xong context & ví dụ, dễ áp dụng hơn</td>
+          <td class="en">Last</td><td class="en">Specific request + Output format</td><td class="en">AI just finished reading context & examples, easier to apply</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ══════════════ CLAUDE ══════════════ -->
+<div id="claude" class="section">
+  <div class="sec-hdr">
+    <h2>🟠 Claude (Anthropic)</h2>
+    <p class="vi">Đặc điểm riêng của Claude và cách tối ưu hóa prompt theo Anthropic docs chính thức.</p>
+    <p class="en">Claude's unique characteristics and how to optimize prompts per official Anthropic documentation.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--amber)">
+    <div class="card-title"><span class="badge b-amber vi">Thay đổi quan trọng</span><span class="badge b-amber en">Key Change</span>
+      <h3 class="vi">Claude 4.x — Làm đúng những gì bạn viết</h3>
+      <h3 class="en">Claude 4.x — Does Exactly What You Write</h3>
+    </div>
+    <p class="vi">Claude 4.x được huấn luyện để làm <strong>chính xác</strong> những gì bạn yêu cầu, không tự suy diễn thêm. Đây là thay đổi lớn nhất so với Claude 3.x — phiên bản cũ thường "điền vào chỗ trống" khi prompt thiếu thông tin.</p>
+    <p class="en">Claude 4.x is trained to do <strong>exactly</strong> what you request, without inferring intent. This is the biggest change from Claude 3.x — the older version would "fill in gaps" when prompts were incomplete.</p>
+    <div class="dd">
+      <div class="do-b">
+        <div class="do-lbl vi">✓ CLAUDE 4.x — ĐÚNG</div><div class="do-lbl en">✓ CLAUDE 4.x — CORRECT</div>
+        <p class="vi">Cung cấp đầy đủ: stack công nghệ cụ thể, phiên bản, môi trường, vấn đề đo được, định dạng đầu ra mong muốn. Claude sẽ làm chính xác theo spec.</p>
+        <p class="en">Provide everything: specific tech stack, version, environment, measurable problem, desired output format. Claude will follow the spec precisely.</p>
+      </div>
+      <div class="dn-b">
+        <div class="dn-lbl vi">✗ LỖI PHỔ BIẾN</div><div class="dn-lbl en">✗ COMMON MISTAKE</div>
+        <p class="vi">Dùng prompt kiểu Claude 3 với đề mơ hồ, kỳ vọng Claude tự hiểu → Claude 4 hỏi lại hoặc trả lời quá chung chung.</p>
+        <p class="en">Using Claude 3-style vague prompts, expecting Claude to understand intent → Claude 4 asks for clarification or gives overly generic answers.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge b-purple">Extended Thinking</span>
+      <h3 class="vi">Vũ khí bí mật của Claude — Dùng khi nào?</h3>
+      <h3 class="en">Claude's Secret Weapon — When to Use It?</h3>
+    </div>
+    <p class="vi">Anthropic báo cáo Extended Thinking cải thiện đáng kể với bài toán phức tạp. Cognition AI ghi nhận tăng 18% hiệu suất lập kế hoạch. Trên thi AIME 2025, Claude với Extended Thinking vượt trội so với mode thông thường.</p>
+    <p class="en">Anthropic reports Extended Thinking significantly improves complex problem performance. Cognition AI recorded 18% planning improvement. On AIME 2025, Claude with Extended Thinking substantially outperformed standard mode.</p>
+    <div class="twrap"><table>
+      <thead><tr>
+        <th class="vi">Use case</th><th class="vi">Dùng Extended Thinking?</th>
+        <th class="en">Use case</th><th class="en">Use Extended Thinking?</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="vi">Bài toán toán học / logic phức tạp</td><td class="vi">✅ Có — 10/10</td>
+            <td class="en">Complex math / logic problems</td><td class="en">✅ Yes — 10/10</td></tr>
+        <tr><td class="vi">Lập kế hoạch chiến lược đa bước</td><td class="vi">✅ Có — 9/10</td>
+            <td class="en">Multi-step strategic planning</td><td class="en">✅ Yes — 9/10</td></tr>
+        <tr><td class="vi">Code phức tạp / architecture review</td><td class="vi">✅ Có — 9/10</td>
+            <td class="en">Complex code / architecture review</td><td class="en">✅ Yes — 9/10</td></tr>
+        <tr><td class="vi">Câu hỏi đơn giản / tác vụ thông thường</td><td class="vi">❌ Không cần — 3/10</td>
+            <td class="en">Simple questions / routine tasks</td><td class="en">❌ Not needed — 3/10</td></tr>
+      </tbody>
+    </table></div>
+    <div class="code"><span class="kgood vi">"Hãy phân tích vấn đề này có hệ thống.
+Đi qua từng ràng buộc từng bước, kiểm tra từng khả năng
+trước khi đưa ra kết luận. Đừng vội vàng. Tôi cần reasoning đầy đủ.
+
+[Bài toán phức tạp của bạn]"</span>
+<span class="kgood en">"Analyze this problem systematically.
+Work through each constraint step by step, checking every possibility
+before drawing conclusions. Don't rush. I need full reasoning.
+
+[Your complex problem]"</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">Claude với XML Tags — Tổ chức nội dung phức tạp</h3><h3 class="en">Claude with XML Tags — Organize Complex Content</h3></div>
+    <p class="vi">Khi prompt có nhiều loại thông tin khác nhau, XML tags giúp Claude phân biệt rõ ràng và xử lý chính xác hơn. Đặc biệt hữu ích khi paste tài liệu dài hoặc nhiều nguồn khác nhau.</p>
+    <p class="en">When prompts contain multiple types of information, XML tags help Claude clearly distinguish and process them more accurately. Especially useful when pasting long documents or multiple sources.</p>
+    <div class="code"><span class="kvar">&lt;context&gt;</span>
+<span class="kgood">  Tôi là CTO tại công ty logistics 200 nhân viên.
+  Stack hiện tại: Python/Django, PostgreSQL, AWS.
+</span><span class="kvar">&lt;/context&gt;</span>
+
+<span class="kvar">&lt;problem&gt;</span>
+<span class="kgood">  API response time tăng từ 200ms lên 2s trong 2 tuần qua.
+  Traffic tăng 3x nhưng database queries chưa được optimize.
+</span><span class="kvar">&lt;/problem&gt;</span>
+
+<span class="kvar">&lt;constraints&gt;</span>
+<span class="kgood">  - Không thể downtime &gt; 5 phút trong giờ hành chính
+  - Budget AWS tăng tối đa 30%
+  - Team: 3 backend devs, 1 DevOps
+</span><span class="kvar">&lt;/constraints&gt;</span>
+
+<span class="kvar">&lt;task&gt;</span>
+<span class="kgood">  Đề xuất 5 bước tối ưu theo thứ tự ưu tiên.
+  Ước tính effort và impact cho từng bước.
+  Format: bảng Priority | Action | Effort | Expected Impact
+</span><span class="kvar">&lt;/task&gt;</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">Mẹo vàng từ cộng đồng Claude</h3><h3 class="en">Golden Tips from the Claude Community</h3></div>
+    <ul class="tips">
+      <li><div class="tip-dot d-t">✓</div><div class="tip-txt"><strong class="vi">Giữ context tập trung:</strong><strong class="en">Keep context focused:</strong> <span class="vi">Đừng share quá nhiều tài liệu cùng lúc. "Nhiễu" khiến Claude khó focus. Share đúng tài liệu liên quan nhất.</span><span class="en">Don't share too many documents at once. "Noise" makes Claude unfocused. Share only the most relevant material.</span></div></li>
+      <li><div class="tip-dot d-t">✓</div><div class="tip-txt"><strong class="vi">Khai báo trình độ:</strong><strong class="en">Declare your level:</strong> <span class="vi">"Tôi là junior dev" vs "Tôi là senior infra engineer" → Claude điều chỉnh mức độ giải thích phù hợp.</span><span class="en">"I'm a junior dev" vs "I'm a senior infra engineer" → Claude adjusts explanation depth accordingly.</span></div></li>
+      <li><div class="tip-dot d-t">✓</div><div class="tip-txt"><strong class="vi">Dùng trigger AMA:</strong><strong class="en">Use AMA trigger:</strong> <span class="vi">Thêm "AMA" (Ask Me Anything) vào prompt → Claude hỏi lại để làm rõ trước khi trả lời. Giúp kết quả chính xác hơn nhiều.</span><span class="en">Add "AMA" (Ask Me Anything) to your prompt → Claude asks clarifying questions before answering. Leads to much more accurate results.</span></div></li>
+      <li><div class="tip-dot d-t">✓</div><div class="tip-txt"><strong class="vi">Nói rõ bạn đã thử gì:</strong><strong class="en">State what you've tried:</strong> <span class="vi">"Tôi đã thử A và B nhưng không hiệu quả vì [lý do]" → tránh Claude lặp lại giải pháp bạn đã biết là sai.</span><span class="en">"I already tried A and B but they didn't work because [reason]" → prevents Claude from repeating solutions you know are wrong.</span></div></li>
+      <li><div class="tip-dot d-a">⚠</div><div class="tip-txt"><strong class="vi">Context "nhiễu" sau nhiều vòng:</strong><strong class="en">Context "pollution" after many rounds:</strong> <span class="vi">Nếu Claude lặp sai sau 3 lần, bắt đầu conversation mới và giải thích lại từ đầu.</span><span class="en">If Claude repeats mistakes after 3 tries, start a new conversation and re-explain from scratch.</span></div></li>
+      <li><div class="tip-dot d-c">✗</div><div class="tip-txt"><strong class="vi">Myth "ultrathink":</strong><strong class="en">Myth "ultrathink":</strong> <span class="vi">Không có keyword ma thuật nào kích hoạt mode đặc biệt. "ultrathink", "think harder" — đây là tin đồn lan truyền trên mạng xã hội, không có cơ sở kỹ thuật.</span><span class="en">There are no magic keywords that activate special modes. "ultrathink", "think harder" — these are social media myths with no technical basis.</span></div></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════ CHATGPT ══════════════ -->
+<div id="chatgpt" class="section">
+  <div class="sec-hdr">
+    <h2>🟢 ChatGPT (OpenAI)</h2>
+    <p class="vi">Đặc điểm GPT-5 và cách tối ưu hóa theo OpenAI guidelines chính thức.</p>
+    <p class="en">GPT-5 characteristics and optimization per official OpenAI guidelines.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid #16a34a">
+    <div class="card-title"><span class="badge b-green">GPT-5</span>
+      <h3 class="vi">Prompt dài hơn, đa bước hơn — GPT-5 xử lý tốt</h3>
+      <h3 class="en">Longer, Multi-Step Prompts — GPT-5 Handles Well</h3>
+    </div>
+    <p class="vi">Theo OpenAI Academy: GPT-5 hiểu implicit context tốt hơn đáng kể so với các phiên bản trước. Bạn có thể gộp nhiều yêu cầu liên quan vào một prompt thay vì phải chia nhỏ, mà vẫn nhận được output nhất quán.</p>
+    <p class="en">Per OpenAI Academy: GPT-5 understands implicit context significantly better than previous versions. You can consolidate related requests into one prompt instead of breaking them apart, while still getting coherent output.</p>
+    <div class="callout tip">
+      <span class="vi">💡 Vẫn nên chỉ định rõ: role + audience + format. GPT-5 hiểu ngầm ý tốt hơn, nhưng việc chỉ định rõ ràng vẫn cho kết quả chính xác nhất.</span>
+      <span class="en">💡 Still best to specify: role + audience + format. GPT-5 handles implicit context better, but explicit specification still yields the most accurate results.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">System Message — Thiết lập hành vi nền (API)</h3><h3 class="en">System Message — Configure Baseline Behavior (API)</h3></div>
+    <p class="vi">System Message là công cụ mạnh nhất khi dùng ChatGPT qua API. Đây là nơi thiết lập vai trò, quy tắc, tone và ngữ cảnh nền áp dụng cho toàn bộ conversation.</p>
+    <p class="en">System Message is the most powerful tool when using ChatGPT via API. This is where you set role, rules, tone, and baseline context that applies to the entire conversation.</p>
+    <div class="code"><span class="kcmt"># Ví dụ System Message cho Customer Support Agent</span>
+<span class="kgood">System: "You are a helpful customer service agent for TechCorp.
+
+Rules:
+- Always greet with: 'Hi, welcome to TechCorp support!'
+- Never discuss competitor products or pricing
+- For refund requests: collect order number first, then escalate
+- If unsure: say 'Let me check that for you' and ask clarifying questions
+- Respond in the customer's language
+- Keep responses under 150 words
+
+Tone: Professional but warm. Use contractions (I'm, we'll).
+Never use: 'Unfortunately', 'I'm sorry but', 'I cannot'."
+
+User: [customer message]</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">GPT-5 Agentic Workflow — 3 yếu tố cần có</h3><h3 class="en">GPT-5 Agentic Workflow — 3 Required Elements</h3></div>
+    <p class="vi">OpenAI khuyến nghị 3 yếu tố trong mọi agentic prompt để GPT-5 hoạt động hiệu quả nhất:</p>
+    <p class="en">OpenAI recommends 3 elements in every agentic prompt for optimal GPT-5 performance:</p>
+    <ul class="tips">
+      <li><div class="tip-dot d-t">1</div><div class="tip-txt"><strong class="vi">Lập kế hoạch đầy đủ:</strong><strong class="en">Full planning:</strong> <span class="vi">"Resolve the complete query before stopping. Decompose into sub-tasks and verify each before moving on. Do not stop after completing only part of the request."</span><span class="en">"Resolve the complete query before stopping. Decompose into sub-tasks and verify each before moving on. Do not stop after completing only part of the request."</span></div></li>
+      <li><div class="tip-dot d-t">2</div><div class="tip-txt"><strong class="vi">Preamble rõ ràng:</strong><strong class="en">Clear preamble:</strong> <span class="vi">Giải thích context trước mỗi quyết định dùng tool quan trọng — GPT-5 cần context để quyết định đúng.</span><span class="en">Explain context before each major tool decision — GPT-5 needs context to decide correctly.</span></div></li>
+      <li><div class="tip-dot d-t">3</div><div class="tip-txt"><strong class="vi">Track tiến độ:</strong><strong class="en">Track progress:</strong> <span class="vi">"Use a TODO list to track workflow. Don't terminate until all items are completed."</span><span class="en">"Use a TODO list to track workflow. Don't terminate until all items are completed."</span></div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">Custom GPTs — Tận dụng tối đa ChatGPT Plus/Team</h3><h3 class="en">Custom GPTs — Maximize ChatGPT Plus/Team</h3></div>
+    <p class="vi">Custom GPTs cho phép tạo "phiên bản AI chuyên biệt" với knowledge base, instructions và capabilities riêng. Đây là cách hiệu quả nhất để chuẩn hóa việc dùng AI trong team.</p>
+    <p class="en">Custom GPTs let you create a "specialized AI version" with private knowledge base, custom instructions, and specific capabilities. The most effective way to standardize AI usage across a team.</p>
+    <div class="g2">
+      <div class="card" style="border:1px solid var(--bdr);margin-bottom:0">
+        <p style="font-weight:700;margin-bottom:8px">📊 Data Analyst GPT</p>
+        <p class="vi" style="font-size:13px">Upload: company data schema, KPI definitions, reporting templates → GPT tự động biết cách phân tích đúng format nội bộ.</p>
+        <p class="en" style="font-size:13px">Upload: company data schema, KPI definitions, reporting templates → GPT automatically knows how to analyze in the correct internal format.</p>
+      </div>
+      <div class="card" style="border:1px solid var(--bdr);margin-bottom:0">
+        <p style="font-weight:700;margin-bottom:8px">✍️ Brand Voice GPT</p>
+        <p class="vi" style="font-size:13px">Upload: brand guidelines, tone of voice doc, content examples → GPT tạo content luôn đúng thương hiệu mà không cần nhắc lại mỗi lần.</p>
+        <p class="en" style="font-size:13px">Upload: brand guidelines, tone of voice doc, content examples → GPT always creates on-brand content without having to remind it each time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ COMPARE ══════════════ -->
+<div id="compare" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">⚖️ Claude vs ChatGPT — Khi Nào Dùng Cái Nào?</h2>
+    <h2 class="en">⚖️ Claude vs ChatGPT — Which to Use When?</h2>
+  </div>
+  <div class="mgrid">
+    <div class="mcard">
+      <div class="mhead cl"><h3>🟠 Claude (Anthropic)</h3><p>Sonnet 4.6 · Opus 4.6</p></div>
+      <div class="mbody">
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Context cực dài:</strong><strong class="en">Extremely long context:</strong> <span class="vi">200K+ tokens — đọc cả cuốn sách, phân tích codebase lớn</span><span class="en">200K+ tokens — read entire books, analyze large codebases</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Lý luận phức tạp:</strong><strong class="en">Complex reasoning:</strong> <span class="vi">Extended thinking, multi-step logic, chiến lược</span><span class="en">Extended thinking, multi-step logic, strategy</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Viết sáng tạo:</strong><strong class="en">Creative writing:</strong> <span class="vi">Văn phong tự nhiên, nhất quán phong cách dài hơi</span><span class="en">Natural prose, consistent long-form style</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Code review:</strong><strong class="en">Code review:</strong> <span class="vi">Refactor, debug phức tạp, architecture analysis</span><span class="en">Refactor, complex debugging, architecture analysis</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Instruction following:</strong><strong class="en">Instruction following:</strong> <span class="vi">Cực kỳ chính xác — làm đúng spec, không thêm bớt</span><span class="en">Extremely precise — follows spec exactly, no extras</span></div></div>
+        <div class="mf" style="opacity:.5"><span class="mf-ic">—</span><div class="mf-t vi">Không generate ảnh natively, không voice mode</div><div class="mf-t en">No native image generation, no voice mode</div></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mhead gpt"><h3>🟢 ChatGPT (OpenAI)</h3><p>GPT-4o · GPT-5</p></div>
+      <div class="mbody">
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Đa phương tiện:</strong><strong class="en">Multimodal:</strong> <span class="vi">Generate ảnh (DALL-E), voice mode, xử lý file đa dạng</span><span class="en">Image generation (DALL-E), voice mode, diverse file handling</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Ecosystem rộng:</strong><strong class="en">Wide ecosystem:</strong> <span class="vi">Plugins, Zapier integration, Custom GPTs, API tools</span><span class="en">Plugins, Zapier integration, Custom GPTs, API tools</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Browse realtime:</strong><strong class="en">Realtime browsing:</strong> <span class="vi">Tìm kiếm web, tin tức mới nhất, thông tin cập nhật</span><span class="en">Web search, latest news, up-to-date information</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Data analysis:</strong><strong class="en">Data analysis:</strong> <span class="vi">Code interpreter — phân tích CSV, vẽ biểu đồ trực tiếp</span><span class="en">Code interpreter — analyze CSV, draw charts directly</span></div></div>
+        <div class="mf"><span class="mf-ic">✦</span><div class="mf-t"><strong class="vi">Automation:</strong><strong class="en">Automation:</strong> <span class="vi">Zapier, Make.com tích hợp mạnh cho workflow tự động</span><span class="en">Strong Zapier/Make.com integration for automated workflows</span></div></div>
+        <div class="mf" style="opacity:.5"><span class="mf-ic">—</span><div class="mf-t vi">Context window nhỏ hơn Claude với tài liệu cực dài</div><div class="mf-t en">Smaller context window than Claude for extremely long docs</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="twrap"><table>
+    <thead><tr>
+      <th class="vi">Tác vụ</th><th>Claude</th><th>ChatGPT</th><th class="vi">Gợi ý</th>
+      <th class="en">Task</th><th class="en">Recommendation</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="vi">Đọc/phân tích tài liệu &gt;50 trang</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐</td><td class="vi">Claude</td>
+          <td class="en">Read/analyze docs &gt;50 pages</td><td class="en">Claude</td></tr>
+      <tr><td class="vi">Generate hình ảnh, thiết kế</td><td>—</td><td>⭐⭐⭐⭐⭐</td><td class="vi">ChatGPT</td>
+          <td class="en">Image generation, design</td><td class="en">ChatGPT</td></tr>
+      <tr><td class="vi">Debug & code review phức tạp</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td class="vi">Claude</td>
+          <td class="en">Complex debug & code review</td><td class="en">Claude</td></tr>
+      <tr><td class="vi">Phân tích dữ liệu, vẽ biểu đồ</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td class="vi">ChatGPT</td>
+          <td class="en">Data analysis, chart creation</td><td class="en">ChatGPT</td></tr>
+      <tr><td class="vi">Viết sáng tạo, copywriting</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td class="vi">Claude</td>
+          <td class="en">Creative writing, copywriting</td><td class="en">Claude</td></tr>
+      <tr><td class="vi">Thông tin realtime, browse web</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td class="vi">ChatGPT</td>
+          <td class="en">Realtime info, web browsing</td><td class="en">ChatGPT</td></tr>
+      <tr><td class="vi">Automation workflow</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td class="vi">ChatGPT</td>
+          <td class="en">Workflow automation</td><td class="en">ChatGPT</td></tr>
+      <tr><td class="vi">Lý luận logic, toán học</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td class="vi">Cả hai</td>
+          <td class="en">Logic reasoning, math</td><td class="en">Both excel</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ══════════════ ADVANCED ══════════════ -->
+<div id="advanced" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">🚀 Kỹ Năng Nâng Cao</h2>
+    <h2 class="en">🚀 Advanced Skills</h2>
+    <p class="vi">Dành cho người đã nắm vững cơ bản và muốn đẩy kết quả lên tầm tiếp theo.</p>
+    <p class="en">For those who've mastered the basics and want to take results to the next level.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge b-purple vi">Nâng cao</span><span class="badge b-purple en">Advanced</span>
+      <h3 class="vi">4 Mode làm việc với AI</h3>
+      <h3 class="en">4 AI Working Modes</h3>
+    </div>
+    <p class="vi">Phân biệt rõ mục tiêu trước mỗi lần dùng AI. Lỗi phổ biến nhất là trộn lẫn nhiều mode vào một prompt. Tách riêng → kết quả tốt hơn nhiều.</p>
+    <p class="en">Clearly distinguish your goal before each AI interaction. The most common mistake is mixing multiple modes into one prompt. Keep them separate → much better results.</p>
+    <ul class="tips">
+      <li><div class="tip-dot d-p" style="font-size:9px">BUILD</div><div class="tip-txt"><strong class="vi">Build Mode — Tạo ra thứ gì đó:</strong><strong class="en">Build Mode — Create something:</strong> <span class="vi">Spec cụ thể, ngắn gọn. Bỏ tất cả meta-instruction ("đừng rườm rà", "viết ngắn thôi"). Chỉ cần spec rõ ràng là đủ.</span><span class="en">Specific spec, concise. Drop all meta-instructions ("don't be verbose", "keep it short"). Clear spec is all you need.</span></div></li>
+      <li><div class="tip-dot d-t" style="font-size:9px">DEBUG</div><div class="tip-txt"><strong class="vi">Debug Mode — Sửa vấn đề:</strong><strong class="en">Debug Mode — Fix problems:</strong> <span class="vi">Chia sẻ đầy đủ: inputs, logs, môi trường, những gì đã thử. Để AI chẩn đoán TRƯỚC khi yêu cầu fix.</span><span class="en">Share everything: inputs, logs, environment, what you've tried. Let AI diagnose FIRST before asking for a fix.</span></div></li>
+      <li><div class="tip-dot d-a" style="font-size:9px">LEARN</div><div class="tip-txt"><strong class="vi">Learn Mode — Học kiến thức:</strong><strong class="en">Learn Mode — Learn knowledge:</strong> <span class="vi">Khai báo trình độ + mục tiêu. "Tôi là [level], muốn hiểu [concept] để [áp dụng gì cụ thể]."</span><span class="en">Declare level + goal. "I'm a [level], want to understand [concept] to [specific application]."</span></div></li>
+      <li><div class="tip-dot d-c" style="font-size:9px">CRITIC</div><div class="tip-txt"><strong class="vi">Critic Mode — Đánh giá, cải thiện:</strong><strong class="en">Critic Mode — Evaluate, improve:</strong> <span class="vi">Có sẵn draft. Yêu cầu phê bình thẳng thắn + chỉ định góc độ đánh giá cụ thể. "Đừng khen ngợi chung, hãy chỉ ra điểm yếu cụ thể."</span><span class="en">Have a draft ready. Request direct critique + specify the evaluation angle. "Don't give generic praise, point out specific weaknesses."</span></div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge b-amber vi">Nâng cao</span><span class="badge b-amber en">Advanced</span>
+      <h3 class="vi">Meta-Prompting — Để AI viết prompt cho bạn</h3>
+      <h3 class="en">Meta-Prompting — Let AI Write Prompts for You</h3>
+    </div>
+    <div class="code"><span class="kgood vi">"Tôi cần tạo một prompt để [mục tiêu cụ thể].
+Context của tôi: [mô tả situation]
+Hãy viết một prompt tối ưu cho tôi, giải thích
+từng phần trong prompt và lý do tại sao nó hiệu quả.
+Sau đó đề xuất 2 biến thể thay thế nếu mục tiêu thay đổi."</span>
+<span class="kgood en">"I need to create a prompt to [specific goal].
+My context: [situation description]
+Write an optimized prompt for me, explain
+each part of the prompt and why it works.
+Then suggest 2 alternative variants if the goal changes."</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge b-teal vi">Workflow</span><span class="badge b-teal en">Workflow</span>
+      <h3 class="vi">Xây dựng Prompt Library cá nhân</h3>
+      <h3 class="en">Build a Personal Prompt Library</h3>
+    </div>
+    <p class="vi">Asset quan trọng nhất của bạn theo thời gian. Lưu prompt đã hoạt động tốt, tag theo use case, update khi model thay đổi.</p>
+    <p class="en">Your most valuable long-term asset. Save prompts that worked well, tag by use case, update when models change.</p>
+    <div class="twrap"><table>
+      <thead><tr>
+        <th class="vi">Tên prompt</th><th class="vi">Use case</th><th class="vi">Model tốt nhất</th><th class="vi">Hiệu quả</th>
+        <th class="en">Prompt Name</th><th class="en">Use Case</th><th class="en">Best Model</th><th class="en">Effectiveness</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Email B2B follow-up</td><td>Sales</td><td>Claude Sonnet</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>Code review security</td><td>Engineering</td><td>Claude Opus</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>Market SWOT analysis</td><td>Strategy</td><td>GPT-5</td><td>⭐⭐⭐⭐</td></tr>
+        <tr><td>Social media caption</td><td>Marketing</td><td>Claude Sonnet</td><td>⭐⭐⭐⭐</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ══════════════ TEMPLATES ══════════════ -->
+<div id="templates" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">📋 Mẫu Prompt Sẵn Dùng</h2>
+    <h2 class="en">📋 Ready-to-Use Prompt Templates</h2>
+    <p class="vi">Copy và thay thế các phần trong [ngoặc vuông] theo nhu cầu của bạn.</p>
+    <p class="en">Copy and replace the parts in [square brackets] with your specifics.</p>
+  </div>
+
+  <div class="tmpl">
+    <div class="tmpl-hdr"><h3 class="vi">📝 Viết nội dung / Copywriting</h3><h3 class="en">📝 Content Writing / Copywriting</h3><span class="badge b-teal">Marketing</span></div>
+    <div class="tmpl-body">
+      <div class="pbox vi"><span class="pvar">[CONTEXT]</span>
+Tôi là <span class="pvar">[vai trò của bạn]</span> tại <span class="pvar">[loại công ty]</span>.
+Sản phẩm/dịch vụ: <span class="pvar">[mô tả ngắn]</span>
+Đối tượng khách hàng: <span class="pvar">[mô tả target audience]</span>
+Điểm khác biệt (USP): <span class="pvar">[lợi thế cạnh tranh chính]</span>
+
+<span class="pvar">[VÍ DỤ PHONG CÁCH]</span>
+"<span class="pvar">[Paste ví dụ content bạn thích ở đây]</span>"
+
+<span class="pvar">[NHIỆM VỤ]</span>
+Viết <span class="pvar">[loại nội dung]</span> cho <span class="pvar">[kênh/nền tảng]</span>.
+
+<span class="pvar">[RÀNG BUỘC]</span>
+- Độ dài: <span class="pvar">[số từ]</span>
+- Tone: <span class="pvar">[chuyên nghiệp/thân thiện/khẩn cấp]</span>
+- TRÁNH: "world-class", "cutting-edge", "synergy"
+- Kết thúc bằng CTA: <span class="pvar">[hành động mong muốn]</span></div>
+      <div class="pbox en"><span class="pvar">[CONTEXT]</span>
+I am a <span class="pvar">[your role]</span> at a <span class="pvar">[company type]</span>.
+Product/service: <span class="pvar">[brief description]</span>
+Target audience: <span class="pvar">[audience description]</span>
+Key differentiator (USP): <span class="pvar">[main competitive advantage]</span>
+
+<span class="pvar">[STYLE EXAMPLE]</span>
+"<span class="pvar">[Paste a content example you like here]</span>"
+
+<span class="pvar">[TASK]</span>
+Write a <span class="pvar">[content type]</span> for <span class="pvar">[channel/platform]</span>.
+
+<span class="pvar">[CONSTRAINTS]</span>
+- Length: <span class="pvar">[word count]</span>
+- Tone: <span class="pvar">[professional/friendly/urgent]</span>
+- AVOID: "world-class", "cutting-edge", "synergy"
+- End with CTA: <span class="pvar">[desired action]</span></div>
+    </div>
+  </div>
+
+  <div class="tmpl">
+    <div class="tmpl-hdr"><h3>💻 Debug / Code Review</h3><span class="badge b-purple">Engineering</span></div>
+    <div class="tmpl-body">
+      <div class="pbox"><span class="pvar">ENVIRONMENT:</span> <span class="pvar">[language] [version] · [framework] · [OS]</span>
+
+<span class="pvar">PROBLEM:</span> <span class="pvar">[Exact description of what's wrong and when it happens]</span>
+
+<span class="pvar">ERROR LOG:</span>
+<span class="pvar">[Paste full error output here]</span>
+
+<span class="pvar">RELEVANT CODE:</span>
+<span class="pvar">[Paste the problematic code section]</span>
+
+<span class="pvar">ALREADY TRIED:</span> <span class="pvar">[List what you've attempted to fix]</span>
+
+<span class="pvar">REQUIRED OUTPUT:</span>
+1. Root cause explanation (not symptoms)
+2. Fix with specific code changes
+3. Why this fix works
+4. Any edge cases or side effects to watch for</div>
+    </div>
+  </div>
+
+  <div class="tmpl">
+    <div class="tmpl-hdr"><h3 class="vi">📊 Phân tích kinh doanh / Chiến lược</h3><h3 class="en">📊 Business Analysis / Strategy</h3><span class="badge b-amber">Business</span></div>
+    <div class="tmpl-body">
+      <div class="pbox vi"><span class="pvar">[CONTEXT]</span>
+Tôi là <span class="pvar">[vai trò]</span> tại <span class="pvar">[công ty, quy mô, ngành]</span>.
+
+<span class="pvar">[DỮ LIỆU / TÌNH HUỐNG]</span>
+<span class="pvar">[Paste dữ liệu, báo cáo, hoặc mô tả vấn đề chi tiết]</span>
+
+<span class="pvar">[PHÂN TÍCH YÊU CẦU]</span>
+1. Xác định 3 insight quan trọng nhất từ dữ liệu
+2. Chỉ ra rủi ro chính cần lưu ý ngay
+3. Đề xuất hành động ưu tiên với timeline cụ thể
+
+<span class="pvar">[RÀNG BUỘC]</span>
+- Ngân sách: <span class="pvar">[nếu có]</span> · Timeline: <span class="pvar">[deadline]</span>
+- Team: <span class="pvar">[quy mô, kỹ năng]</span>
+
+<span class="pvar">[FORMAT]</span>
+Bảng tóm tắt (Priority | Action | Effort | Impact)
++ Giải thích chi tiết phía dưới.
+Nếu dữ liệu không đủ để kết luận chắc chắn, hãy nói rõ.</div>
+      <div class="pbox en"><span class="pvar">[CONTEXT]</span>
+I am a <span class="pvar">[role]</span> at a <span class="pvar">[company type, size, industry]</span>.
+
+<span class="pvar">[DATA / SITUATION]</span>
+<span class="pvar">[Paste data, reports, or detailed problem description]</span>
+
+<span class="pvar">[REQUIRED ANALYSIS]</span>
+1. Identify the 3 most important insights from the data
+2. Flag the main risks requiring immediate attention
+3. Propose prioritized actions with specific timelines
+
+<span class="pvar">[CONSTRAINTS]</span>
+- Budget: <span class="pvar">[if applicable]</span> · Timeline: <span class="pvar">[deadline]</span>
+- Team: <span class="pvar">[size, skills]</span>
+
+<span class="pvar">[FORMAT]</span>
+Summary table (Priority | Action | Effort | Impact)
++ Detailed explanation below.
+If data is insufficient to draw firm conclusions, say so explicitly.</div>
+    </div>
+  </div>
+
+  <div class="tmpl">
+    <div class="tmpl-hdr"><h3 class="vi">🎓 Học và giải thích khái niệm</h3><h3 class="en">🎓 Learning & Concept Explanation</h3><span class="badge b-blue">Learning</span></div>
+    <div class="tmpl-body">
+      <div class="pbox vi">Tôi biết <span class="pvar">[kiến thức nền của bạn]</span> nhưng chưa hiểu rõ <span class="pvar">[chủ đề]</span>.
+Giải thích như thể tôi là <span class="pvar">[kỹ sư backend / marketer / người mới]</span>.
+
+CẤU TRÚC YÊU CẦU:
+1. Khái niệm cốt lõi bằng ngôn ngữ đơn giản (2-3 câu)
+2. Analogy thực tế liên quan đến <span class="pvar">[lĩnh vực quen thuộc của tôi]</span>
+3. Ví dụ cụ thể áp dụng vào <span class="pvar">[ngữ cảnh công việc của tôi]</span>
+4. Lỗi hiểu nhầm phổ biến nhất cần tránh
+5. Câu hỏi để kiểm tra tôi đã hiểu đúng chưa</div>
+      <div class="pbox en">I know <span class="pvar">[your background knowledge]</span> but don't understand <span class="pvar">[topic]</span>.
+Explain as if I'm a <span class="pvar">[backend engineer / marketer / beginner]</span>.
+
+REQUIRED STRUCTURE:
+1. Core concept in simple language (2-3 sentences)
+2. Real-world analogy related to <span class="pvar">[my familiar domain]</span>
+3. Concrete example applied to <span class="pvar">[my work context]</span>
+4. Most common misconception to avoid
+5. A question to check I've understood correctly</div>
+    </div>
+  </div>
+
+  <div class="tmpl">
+    <div class="tmpl-hdr"><h3 class="vi">✍️ Review và cải thiện bài viết</h3><h3 class="en">✍️ Review & Improve Writing</h3><span class="badge b-coral">Editing</span></div>
+    <div class="tmpl-body">
+      <div class="pbox vi">Review bài viết sau với vai trò <span class="pvar">[editor / khách hàng mục tiêu / người phê bình]</span>.
+
+MỤC TIÊU BÀI VIẾT: <span class="pvar">[thuyết phục / thông báo / bán hàng / giáo dục]</span>
+ĐỐI TƯỢNG ĐỌC: <span class="pvar">[mô tả người đọc]</span>
+
+BÀI VIẾT:
+<span class="pvar">[Paste nội dung ở đây]</span>
+
+YÊU CẦU REVIEW:
+1. Điểm mạnh cụ thể cần giữ lại (không phải khen chung)
+2. TOP 3 điểm yếu — chỉ ra đoạn/câu cụ thể
+3. Viết lại 2 đoạn yếu nhất như ví dụ cải thiện
+4. Đánh giá tổng thể (1-10) với lý do chi tiết
+Đừng chỉ khen ngợi chung chung — critique thẳng thắn.</div>
+      <div class="pbox en">Review the following piece as a <span class="pvar">[editor / target reader / critic]</span>.
+
+CONTENT GOAL: <span class="pvar">[persuade / inform / sell / educate]</span>
+TARGET READER: <span class="pvar">[reader description]</span>
+
+CONTENT:
+<span class="pvar">[Paste content here]</span>
+
+REVIEW REQUIREMENTS:
+1. Specific strengths to preserve (not generic praise)
+2. TOP 3 weaknesses — cite specific paragraphs/sentences
+3. Rewrite the 2 weakest sections as improvement examples
+4. Overall rating (1-10) with detailed reasoning
+Don't give generic praise — be direct and critical.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ USE CASES ══════════════ -->
+<div id="usecases" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">💼 Prompt Theo Lĩnh Vực Nghề Nghiệp</h2>
+    <h2 class="en">💼 Prompts by Profession</h2>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-title"><span class="badge b-purple">👨‍💻</span><h3 class="vi">Lập trình viên / Developer</h3><h3 class="en">Developer / Engineer</h3></div>
+      <ul class="tips">
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Explain this code like I'm reviewing a PR. What does it do, what could go wrong, and what would you improve?"</div><div class="tip-txt en">"Explain this code like I'm reviewing a PR. What does it do, what could go wrong, and what would you improve?"</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Write tests for this function covering: happy path, edge cases, and error cases. Use [Jest/Pytest]."</div><div class="tip-txt en">"Write tests for this function covering: happy path, edge cases, and error cases. Use [Jest/Pytest]."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Refactor this code for readability. Don't change behavior. Comment every non-obvious decision."</div><div class="tip-txt en">"Refactor this code for readability. Don't change behavior. Comment every non-obvious decision."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"You are a senior security engineer. Audit this endpoint for OWASP Top 10 vulnerabilities."</div><div class="tip-txt en">"You are a senior security engineer. Audit this endpoint for OWASP Top 10 vulnerabilities."</div></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge b-teal">📣</span><h3 class="vi">Marketing / Nội dung</h3><h3 class="en">Marketing / Content</h3></div>
+      <ul class="tips">
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Generate 10 LinkedIn hook variations for this topic. Each hook uses a different emotional angle."</div><div class="tip-txt en">"Generate 10 LinkedIn hook variations for this topic. Each hook uses a different emotional angle."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Write a cold email sequence (3 emails, 3-5-7 day cadence) for [ICP]. Focus on pain point X."</div><div class="tip-txt en">"Write a cold email sequence (3 emails, 3-5-7 day cadence) for [ICP]. Focus on pain point X."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Create a content calendar for [month]: 4 themes, 3 formats each (post/reel/story), brief for each."</div><div class="tip-txt en">"Create a content calendar for [month]: 4 themes, 3 formats each (post/reel/story), brief for each."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Write 5 A/B test variations for this CTA button. Explain which psychological principle each uses."</div><div class="tip-txt en">"Write 5 A/B test variations for this CTA button. Explain which psychological principle each uses."</div></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge b-amber">📈</span><h3 class="vi">Quản lý / Lãnh đạo</h3><h3 class="en">Manager / Leader</h3></div>
+      <ul class="tips">
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Draft a performance review for [role]. Balanced: 2 strengths with examples, 2 areas for growth with action plan."</div><div class="tip-txt en">"Draft a performance review for [role]. Balanced: 2 strengths with examples, 2 areas for growth with action plan."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Summarize this weekly report into 3 paragraphs: progress, blockers, next week priorities."</div><div class="tip-txt en">"Summarize this weekly report into 3 paragraphs: progress, blockers, next week priorities."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Help me prepare for a difficult conversation with [situation]. Give me: opener, key points, likely objections, responses."</div><div class="tip-txt en">"Help me prepare for a difficult conversation with [situation]. Give me: opener, key points, likely objections, responses."</div></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge b-blue">🔬</span><h3 class="vi">Nghiên cứu / Phân tích</h3><h3 class="en">Research / Analysis</h3></div>
+      <ul class="tips">
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Analyze [topic] from 3 perspectives: optimist, pessimist, realist. Then synthesize a balanced view."</div><div class="tip-txt en">"Analyze [topic] from 3 perspectives: optimist, pessimist, realist. Then synthesize a balanced view."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Extract key statistics and findings from this paper. Flag any claims that require verification."</div><div class="tip-txt en">"Extract key statistics and findings from this paper. Flag any claims that require verification."</div></li>
+        <li><div class="tip-dot d-t">→</div><div class="tip-txt vi">"Create a SWOT matrix for [company/product]. Use only verifiable facts, mark speculation clearly."</div><div class="tip-txt en">"Create a SWOT matrix for [company/product]. Use only verifiable facts, mark speculation clearly."</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ MISTAKES ══════════════ -->
+<div id="mistakes" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">🚫 Lỗi Thường Gặp & Cách Khắc Phục</h2>
+    <h2 class="en">🚫 Common Mistakes & How to Fix Them</h2>
+    <p class="vi">8 lỗi phổ biến nhất — tổng hợp từ nghiên cứu và cộng đồng người dùng AI.</p>
+    <p class="en">8 most common mistakes — synthesized from research and the AI user community.</p>
+  </div>
+
+  <div class="mstk">
+    <h3 class="vi">🔴 Lỗi 1: Prompt quá ngắn, thiếu ngữ cảnh</h3>
+    <h3 class="en">🔴 Mistake 1: Prompt too short, missing context</h3>
+    <p class="vi">"Viết cho tôi một email." — AI không biết gửi cho ai, về vấn đề gì, tone ra sao, độ dài bao nhiêu. Kết quả: template chung chung vô dụng.</p>
+    <p class="en">"Write me an email." — AI doesn't know who it's for, what it's about, what tone to use, or how long. Result: useless generic template.</p>
+    <div class="fix">✅ <span class="vi">Fix: Áp dụng framework CRISP. Ít nhất phải có: context, task cụ thể, và format đầu ra mong muốn.</span><span class="en">Fix: Apply the CRISP framework. Minimum: context, specific task, and desired output format.</span></div>
+  </div>
+
+  <div class="mstk">
+    <h3 class="vi">🔴 Lỗi 2: Gộp quá nhiều mục tiêu vào một prompt</h3>
+    <h3 class="en">🔴 Mistake 2: Combining too many goals in one prompt</h3>
+    <p class="vi">Vừa muốn giải thích khái niệm, tạo code, viết documentation, và review security — trong một prompt. AI làm tất cả ở mức trung bình thay vì một thứ thực sự tốt.</p>
+    <p class="en">Wanting to explain a concept, generate code, write documentation, AND review security — all in one prompt. AI does everything at an average level instead of one thing really well.</p>
+    <div class="fix">✅ <span class="vi">Fix: Mỗi prompt = 1 mục tiêu. Dùng Prompt Chaining — kết quả của prompt này là input cho prompt tiếp theo.</span><span class="en">Fix: Each prompt = 1 goal. Use Prompt Chaining — the output of one prompt becomes the input for the next.</span></div>
+  </div>
+
+  <div class="mstk">
+    <h3 class="vi">🔴 Lỗi 3: Kỳ vọng hoàn hảo ở lần đầu</h3>
+    <h3 class="en">🔴 Mistake 3: Expecting perfection on the first try</h3>
+    <p class="vi">Thử một lần, kết quả chưa đạt, kết luận "AI này kém". Thực tế, ngay cả chuyên gia cũng cần 3–5 vòng tinh chỉnh.</p>
+    <p class="en">Try once, results aren't great, conclude "this AI is bad." Reality: even experts need 3–5 rounds of refinement.</p>
+    <div class="fix">✅ <span class="vi">Fix: Xem prompt đầu như "phác thảo". Đọc kết quả, xác định CHÍNH XÁC điểm chưa đạt, thêm thông tin đó vào prompt tiếp theo.</span><span class="en">Fix: Treat the first prompt as a "draft." Read the output, identify EXACTLY what's missing, add that to the next prompt.</span></div>
+  </div>
+
+  <div class="mstk">
+    <h3 class="vi">🔴 Lỗi 4: Dùng kỹ thuật cũ cho model mới</h3>
+    <h3 class="en">🔴 Mistake 4: Using old techniques for new models</h3>
+    <p class="vi">"You are a world-class expert, think step by step, this is very important to my career..." — những câu lệnh này kém hiệu quả với Claude 4.x và GPT-5. Model mới theo yêu cầu sát nghĩa hơn.</p>
+    <p class="en">"You are a world-class expert, think step by step, this is very important to my career..." — these instructions are less effective with Claude 4.x and GPT-5. Newer models follow instructions more literally.</p>
+    <div class="fix">✅ <span class="vi">Fix: Thay "world-class expert" bằng ngữ cảnh cụ thể. Thay meta-instructions bằng spec rõ ràng về output.</span><span class="en">Fix: Replace "world-class expert" with specific context. Replace meta-instructions with clear output specifications.</span></div>
+  </div>
+
+  <div class="mstk">
+    <h3 class="vi">🔴 Lỗi 5: Tin hoàn toàn vào số liệu từ AI</h3>
+    <h3 class="en">🔴 Mistake 5: Fully trusting AI-generated data</h3>
+    <p class="vi">Hallucination (thông tin bịa đặt) vẫn là vấn đề thực. AI có thể đưa ra số liệu, trích dẫn, tên sách/tác giả hoàn toàn không có thật nhưng nghe rất thuyết phục.</p>
+    <p class="en">Hallucination (fabricated information) is still a real problem. AI can produce statistics, citations, book titles/authors that are completely made up but sound convincing.</p>
+    <div class="fix">✅ <span class="vi">Fix: Thêm "Nếu không chắc, hãy nói rõ thay vì đoán mò." Luôn verify số liệu quan trọng từ nguồn độc lập. Không dùng trực tiếp cho tài liệu quan trọng mà không kiểm tra.</span><span class="en">Fix: Add "If unsure, say so rather than guessing." Always verify important statistics from independent sources. Never use directly in important documents without checking.</span></div>
+  </div>
+
+  <div class="mstk">
+    <h3 class="vi">🟡 Hiểu lầm: Role = độ chính xác cao hơn</h3>
+    <h3 class="en">🟡 Misconception: Role = Higher Accuracy</h3>
+    <p class="vi">"You are a doctor / lawyer / expert" không tăng độ chính xác dữ liệu thực tế. Nghiên cứu thực tế cho thấy sự khác biệt accuracy không đáng kể về mặt thống kê.</p>
+    <p class="en">"You are a doctor / lawyer / expert" does not increase factual accuracy. Research shows the accuracy difference is statistically insignificant.</p>
+    <div class="fix">✅ <span class="vi">Role prompting chỉ hiệu quả cho TONE và PHONG CÁCH. Để tăng accuracy, hãy: cung cấp dữ liệu thực, reference sources cụ thể, hoặc yêu cầu AI trích dẫn khi đưa ra thực tế.</span><span class="en">Role prompting only works for TONE and STYLE. To improve accuracy: provide real data, specific reference sources, or ask AI to cite when making factual claims.</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ CHECKLIST ══════════════ -->
+<div id="checklist" class="section">
+  <div class="sec-hdr">
+    <h2 class="vi">✅ Checklist & Quick Reference</h2>
+    <h2 class="en">✅ Checklist & Quick Reference</h2>
+  </div>
+
+  <div class="dark-card">
+    <h3 style="color:#fff;margin-bottom:14px" class="vi">📌 Checklist trước khi gửi prompt</h3>
+    <h3 style="color:#fff;margin-bottom:14px" class="en">📌 Pre-send Prompt Checklist</h3>
+    <ul style="list-style:none;color:rgba(255,255,255,.75);font-size:14px;line-height:2.1">
+      <li class="vi">☐ Đã cung cấp đủ ngữ cảnh (ai, ở đâu, làm gì, mục tiêu là gì)?</li>
+      <li class="en">☐ Did I provide enough context (who, where, what, goal)?</li>
+      <li class="vi">☐ Đã xác định rõ loại output mong muốn (định dạng, độ dài, tone)?</li>
+      <li class="en">☐ Did I specify the desired output (format, length, tone)?</li>
+      <li class="vi">☐ Đã cung cấp ít nhất 1 ví dụ nếu tác vụ phức tạp?</li>
+      <li class="en">☐ Did I provide at least 1 example for complex tasks?</li>
+      <li class="vi">☐ Prompt chỉ có 1 mục tiêu chính (không phải nhiều mục tiêu trộn lẫn)?</li>
+      <li class="en">☐ Does the prompt have only 1 main goal (not multiple mixed goals)?</li>
+      <li class="vi">☐ Đã thêm "nếu không chắc, hãy nói rõ" cho câu hỏi thực tế?</li>
+      <li class="en">☐ Did I add "if unsure, say so" for factual questions?</li>
+      <li class="vi">☐ Prompt có thể tóm tắt trong 1 câu không? (Nếu không → chia nhỏ)</li>
+      <li class="en">☐ Can the prompt be summarized in 1 sentence? (If not → split it)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">⚡ Quick Reference — Các kỹ thuật theo tình huống</h3><h3 class="en">⚡ Quick Reference — Techniques by Situation</h3></div>
+    <div class="twrap"><table>
+      <thead><tr>
+        <th class="vi">Tình huống</th><th class="vi">Kỹ thuật tốt nhất</th>
+        <th class="en">Situation</th><th class="en">Best Technique</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="vi">Bài toán logic/toán phức tạp</td><td class="vi">Chain-of-Thought (CoT)</td>
+            <td class="en">Complex logic/math problem</td><td class="en">Chain-of-Thought (CoT)</td></tr>
+        <tr><td class="vi">Cần định dạng đầu ra nhất quán</td><td class="vi">Few-Shot + Constrained Output</td>
+            <td class="en">Need consistent output format</td><td class="en">Few-Shot + Constrained Output</td></tr>
+        <tr><td class="vi">Quyết định quan trọng, rủi ro cao</td><td class="vi">Self-Consistency (hỏi nhiều lần)</td>
+            <td class="en">High-stakes, important decision</td><td class="en">Self-Consistency (ask multiple times)</td></tr>
+        <tr><td class="vi">Tác vụ phức tạp nhiều bước</td><td class="vi">Prompt Chaining</td>
+            <td class="en">Complex multi-step task</td><td class="en">Prompt Chaining</td></tr>
+        <tr><td class="vi">Chọn giữa nhiều hướng tiếp cận</td><td class="vi">Tree of Thought</td>
+            <td class="en">Choose between multiple approaches</td><td class="en">Tree of Thought</td></tr>
+        <tr><td class="vi">Phát hiện lỗ hổng trong kế hoạch</td><td class="vi">Adversarial Prompting</td>
+            <td class="en">Find flaws in a plan</td><td class="en">Adversarial Prompting</td></tr>
+        <tr><td class="vi">Không biết cách viết prompt</td><td class="vi">Meta-Prompting</td>
+            <td class="en">Don't know how to write the prompt</td><td class="en">Meta-Prompting</td></tr>
+        <tr><td class="vi">Tác vụ đơn giản, rõ ràng</td><td class="vi">Zero-Shot (đủ rồi)</td>
+            <td class="en">Simple, clear task</td><td class="en">Zero-Shot (sufficient)</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h3 class="vi">🔑 5 câu ma thuật luôn hữu ích</h3><h3 class="en">🔑 5 Magic Phrases Always Useful</h3></div>
+    <ul class="tips">
+      <li><div class="tip-dot d-t">1</div><div class="tip-txt"><code>"Let's think through this step by step."</code> — <span class="vi">Kích hoạt Chain-of-Thought, cải thiện reasoning tức thì</span><span class="en">Activates Chain-of-Thought, instantly improves reasoning</span></div></li>
+      <li><div class="tip-dot d-t">2</div><div class="tip-txt"><code>"If you're unsure, say so rather than guessing."</code> — <span class="vi">Giảm hallucination đáng kể</span><span class="en">Significantly reduces hallucination</span></div></li>
+      <li><div class="tip-dot d-t">3</div><div class="tip-txt"><code>"Don't include preamble or explanation, only [output]."</code> — <span class="vi">Nhận kết quả sạch, không cần lọc thêm</span><span class="en">Get clean output, no post-processing needed</span></div></li>
+      <li><div class="tip-dot d-t">4</div><div class="tip-txt"><code>"Now play Devil's Advocate and find flaws."</code> — <span class="vi">Phát hiện điểm yếu trong output vừa nhận</span><span class="en">Reveals weaknesses in the output just received</span></div></li>
+      <li><div class="tip-dot d-t">5</div><div class="tip-txt"><code>"Explain your reasoning, then give the answer."</code> — <span class="vi">Đảm bảo AI suy nghĩ trước khi kết luận, tránh đoán ẩu</span><span class="en">Ensures AI reasons before concluding, avoids guessing</span></div></li>
+    </ul>
+  </div>
+</div>
+
+</main>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const t = document.getElementById(id);
+  if (t) { t.classList.add('active'); }
+  document.querySelectorAll('.nav-link').forEach(l => {
+    if (l.getAttribute('onclick') === "show('" + id + "')") l.classList.add('active');
+  });
+  window.scrollTo(0, 0);
+}
+
+function setLang(lang) {
+  document.body.classList.toggle('en-mode', lang === 'en');
+  document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  localStorage.setItem('ai-guide-lang', lang);
+}
+
+function filterNav(q) {
+  const links = document.querySelectorAll('.nav-link');
+  links.forEach(l => {
+    const txt = l.textContent.toLowerCase();
+    l.style.display = (!q || txt.includes(q.toLowerCase())) ? '' : 'none';
+  });
+}
+
+// Read progress bar
+window.addEventListener('scroll', () => {
+  const el = document.querySelector('.section.active');
+  if (!el) return;
+  const h = el.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 100;
+  document.getElementById('rbar').style.width = pct + '%';
+});
+
+// Restore language
+const saved = localStorage.getItem('ai-guide-lang');
+if (saved === 'en') setLang('en');
+</script>
+</body>
+</html>
